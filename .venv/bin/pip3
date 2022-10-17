@@ -1,4 +1,4 @@
-#!/Users/layakumar/djangoapp/.venv/bin/python3
+#!/Users/layakumar/djangoapp/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
