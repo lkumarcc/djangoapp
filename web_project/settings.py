@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+#defines a location where static files are collected when you use the collectstatic command:
+STATIC_ROOT = BASE_DIR / 'static_collected'
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'hello',
 ]
 
 MIDDLEWARE = [
