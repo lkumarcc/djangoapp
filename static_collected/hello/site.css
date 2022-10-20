@@ -2,3 +2,8 @@
     font-weight: 600;
     color: blue;
 }
+
+.message_list th,td {
+    text-align: left;
+    padding-right: 15px;
+}

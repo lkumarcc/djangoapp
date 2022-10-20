@@ -2,6 +2,10 @@
     font-weight: 600;
     color: blue;
 }
+
+input[name=message] {
+    width: 80%;
+}
 .navbar {
     background-color: lightslategray;
     font-size: 1em;
@@ -29,3 +33,4 @@
     padding: 5px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
