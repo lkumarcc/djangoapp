@@ -22,6 +22,10 @@ def about(request):
 def contact(request):
     return render(request, "hello/contact.html")
 
+def favorites(request):
+    return render(request, "hello/favorites.html")
+
+
 
 def hello_there(request, name):
     return render(
