@@ -16,11 +16,11 @@ class HomeListView(ListView):
         context = super(HomeListView, self).get_context_data(**kwargs)
         return context
 
-def about(request):
-    return render(request, "hello/about.html")
+def profile(request):
+    return render(request, "hello/profile.html")
 
-def contact(request):
-    return render(request, "hello/contact.html")
+def messages(request):
+    return render(request, "hello/messages.html")
 
 def favorites(request):
     return render(request, "hello/favorites.html")
