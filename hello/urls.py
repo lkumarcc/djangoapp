@@ -1,5 +1,6 @@
 from django.urls import path
 from hello import views
+
 from hello.models import LogMessage
 
 home_list_view = views.HomeListView.as_view(
