@@ -1,0 +1,27 @@
+{% extends "hello/layout.html" %}
+{% block title %}
+Add Listing
+{% endblock %}
+{% block content %}
+<form>
+    <label for="address">Address:</label><br>
+    <input type="text" id="address" name="address"><br>
+
+    <label for="city">City:</label><br>
+    <input type="text" id="city" name="city"><br>
+
+    <label for="zip">Zip Code:</label><br>
+    <input type="text" id="zip" name="zip"><br>
+
+    <label for="price">Monthly Lease Price:</label><br>
+    <input type="number" id="price" name="price"><br>
+
+    <label for="rooms">Total Number of Tenants:</label><br>
+    <input type="number" id="rooms" name="rooms"><br>
+
+    <label for="file">House Image Upload:</label><br> <!--modify to only image types, how to upload multiple?-->
+    <input type="file" id="myFile" name="filename">
+
+    <input type="submit">
+</form>
+{% endblock %}

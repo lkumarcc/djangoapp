@@ -1,5 +1,6 @@
 from django.urls import path
 from hello import views
+
 from hello.models import LogMessage
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -16,6 +17,7 @@ urlpatterns = [
     path("messages/", views.messages, name="messages"),
     path("log/", views.log_message, name="log"),
     path("favorites/", views.favorites, name="favorites"),
+    path("add_listing/", views.add_listing, name="add_listing"),
 
     
     

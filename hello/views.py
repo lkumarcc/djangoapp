@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from hello.forms import LogMessageForm
 from hello.models import LogMessage
 from django.views.generic import ListView
-
+from .models import Profile
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
@@ -25,7 +25,8 @@ def messages(request):
 def favorites(request):
     return render(request, "hello/favorites.html")
 
-
+def add_listing(request):
+    return render(request, "hello/add_listing.html")
 
 def hello_there(request, name):
     return render(
@@ -50,4 +51,4 @@ def log_message(request):
             message.save()
             return redirect("home")
     else:
-        return render(request, "hello/log_message.html", {"form": form})
+        return render(request, "hello/log_message.html", {"form": form}) 
