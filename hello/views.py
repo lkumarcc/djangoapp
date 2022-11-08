@@ -25,7 +25,8 @@ def messages(request):
 def favorites(request):
     return render(request, "hello/favorites.html")
 
-
+def add_listing(request):
+    return render(request, "hello/add_listing.html")
 
 def hello_there(request, name):
     return render(

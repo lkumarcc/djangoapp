@@ -16,6 +16,7 @@ urlpatterns = [
     path("messages/", views.messages, name="messages"),
     path("log/", views.log_message, name="log"),
     path("favorites/", views.favorites, name="favorites"),
+    path("add_listing/", views.add_listing, name="add_listing"),
 
     
     
