@@ -1,6 +1,7 @@
 from django.urls import path
 from hello import views
 from hello.models import LogMessage
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 home_list_view = views.HomeListView.as_view(
     queryset=LogMessage.objects.order_by("-log_date")[:5],  # :5 limits the results to the five most recent
@@ -19,3 +20,5 @@ urlpatterns = [
     
     
 ]
+
+urlpatterns += staticfiles_urlpatterns()
