@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Profile
+from .models import addListings
 
 # Register your models here.
 
@@ -22,3 +23,4 @@ admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)
 admin.site.register(Profile)
+admin.site.register(addListings)

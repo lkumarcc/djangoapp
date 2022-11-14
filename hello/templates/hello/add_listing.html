@@ -63,7 +63,8 @@
         </nav>
     </div>
     <!-- Nav Bar Ends-->
-    <form>
+    <form action = "/display/" method = "post">
+        {% csrf_token %}
         <label for="address">Address:</label><br>
         <input type="text" id="address" name="address"><br>
 

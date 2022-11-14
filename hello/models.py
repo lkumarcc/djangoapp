@@ -35,3 +35,13 @@ class Profile(models.Model):
         return self.user.username
     
     22
+    
+class addListings(models.Model):
+    address = models.CharField(max_length=200, blank=True, null=True)
+    city = models.CharField(max_length=200, blank=True, null=True)
+    zip = models.IntegerField(max_length=200, blank=True, null=True)
+    price = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
+    rooms = models.IntegerField(max_length=200, blank=True, null=True)
+    file = models.FileField
+    
+
