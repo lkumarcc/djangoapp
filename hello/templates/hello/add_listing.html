@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    <!-- Nav Bar Starts-->
+    <!-- Nav Bar Starts
     <div class="container-fluid nav-bar bg-transparent">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
         
@@ -62,29 +62,45 @@
             </div>
         </nav>
     </div>
-    <!-- Nav Bar Ends-->
-    <form action = "/display/" method = "post">
-        {% csrf_token %}
-        <label for="address">Address:</label><br>
-        <input type="text" id="address" name="address"><br>
+     Nav Bar Ends-->
 
-        <label for="city">City:</label><br>
-        <input type="text" id="city" name="city"><br>
-
-        <label for="zip">Zip Code:</label><br>
-        <input type="text" id="zip" name="zip"><br>
-
-        <label for="price">Monthly Lease Price:</label><br>
-        <input type="number" id="price" name="price"><br>
-
-        <label for="rooms">Total Number of Tenants:</label><br>
-        <input type="number" id="rooms" name="rooms"><br>
-
-        <label for="file">House Image Upload:</label><br> <!--modify to only image types, how to upload multiple?-->
-        <input type="file" id="myFile" name="filename">
-
-        <input type="submit">
-    </form>
+    <!-- Header Start-->
+    <div class="container-fluid bg-white p-0">
+        <div class="row g-0 align-items-end flex-column-reverse flex-md-row">
+            <div class="row align-items-end col-md-6 p-5 mt-lg-2">
+                <form action = "/display/" method = "post">
+                    {% csrf_token %}
+                    <h1>Address Information</h1>
+                    <label for="address">Address:</label><input type="text" id="address" name="address"><br>
+                    <label for="city">City:</label><input type="text" id="city" name="city"><br>
+                    <label for="zip">Zip Code:</label><input type="text" id="zip" name="zip"><br>   
+                    
+                    <h1>Rent Information</h1>
+                    <label for="price">Monthly Lease Price: </label><input type="number" id="price" name="price"><br>
+                    <label for="deposit">Security Deposit: </label><input type="number" id="deposit" name="deposit"><br>
+                    <label for="rooms">Total Number of Tenants:</label><input type="number" id="rooms" name="rooms"><br>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-person.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="gender">Gender: </label><input list="genders" name="gender"><datalist id="genders"><option value="Women only"><option value="Men only"><option value="All inclusive"></option></datalist></p>
+                    
+                    <h1>Amenities</h1>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-parking.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="parking">Parking: </label><input list="parking" name="parking"><datalist id="parking"><option value="Yes"><option value="No"></option></datalist></p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-wifi.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="internet">Internet: </label><input list="internet" name="internet"><datalist id="internet"><option value="Yes"><option value="No"></option></datalist></p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-pet.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="pets">Pets: </label><input list="pets" name="pets"><datalist id="pets"><option value="Yes"><option value="No"></option></datalist></p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-ac.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="ac">Air Conditioning: </label><input list="ac" name="ac"><datalist id="ac"><option value="Yes"><option value="No"></option></datalist></p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-heat.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="heat">Heating: </label><input list="heat" name="heat"><datalist id="heat"><option value="Yes"><option value="No"></option></datalist></p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-laundry.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="laundry">Laundry Included: </label><input list="laundry" name="laundry"><datalist id="laundry"><option value="In unit"><option value="Out of unit"><option value="No"></option></datalist></p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-streaming.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="tv">Streaming services: </label><input list="tv" name="tv"><datalist id="tv"><option value="Yes"><option value="No"></option></datalist></p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-misc.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="etc">Additional Amenities:</label><br><textarea name="etc" rows="10" cols="50" placeholder="Backyard pool, large front porch, fireplace in living room, etc."></textarea></p>
+            
+                    <label for="file">House Image Upload:</label><br> <!--modify to only image types, how to upload multiple?-->
+                    <input type="file" id="myFile" name="filename">
+            
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+    
     </body>
 </html>
 {% endblock %}
