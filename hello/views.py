@@ -28,6 +28,12 @@ def favorites(request):
 def add_listing(request):
     return render(request, "hello/add_listing.html")
 
+def about(request):
+    return render(request, "hello/about.html")
+
+def listing(request):
+    return render(request, "hello/listing.html")
+
 def display(request):
     print('test')
     add = request.POST.get("address")
