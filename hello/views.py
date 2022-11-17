@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from hello.forms import LogMessageForm
 from hello.models import LogMessage
 from django.views.generic import ListView
-from .models import Profile, addListings
+from .models import Profile, addListings, addressinformation, rentinformation, amenityinfo
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
@@ -40,10 +40,22 @@ def display(request):
     cit = request.POST.get("city")
     zip = request.POST.get("zip")
     pri = request.POST.get("price")
+    dep = request.POST.get("deposit")
     roo = request.POST.get("rooms")
-    fil = request.POST.get("filename")
-    message = add, cit, zip, pri, roo, fil
-    addListings(address = add, city = cit, zip = zip, price = pri, rooms = roo).save()
+    gen = request.POST.get("gender")
+    renetc = request.POST.get("rent_etc")
+    park = request.POST.get("parking")
+    inter = request.POST.get("internet")
+    pet = request.POST.get("pets")
+    ac = request.POST.get("ac")
+    heat = request.POST.get("heat")
+    lau = request.POST.get("laundry")
+    tv = request.POST.get("tv")
+    ammetc = request.POST.get("etc")
+    message = add, cit, zip, pri, dep, roo, gen, renetc, park, inter, pet, ac, heat, lau, ammetc
+    addressinformation(address = add, city = cit, zip = zip).save()
+    rentinformation(monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc).save()
+    amenityinfo(parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc,).save()
     return HttpResponse(message)
     
 

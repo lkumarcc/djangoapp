@@ -45,3 +45,25 @@ class addListings(models.Model):
     file = models.FileField
     
 
+class addressinformation(models.Model):
+    address = models.CharField(max_length=200, blank=True, null=True)
+    city = models.CharField(max_length=200, blank=True, null=True)
+    zip = models.IntegerField(blank=True, null=True)
+    
+class rentinformation(models.Model):
+    monthlyprice = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
+    securitydeposit = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
+    numbertenants = models.IntegerField(blank=True, null=True)
+    gender = models.CharField(max_length=20, blank=True, null=True)
+    addrentinfo = models.CharField(max_length=300, blank=True, null=True)
+    
+class amenityinfo(models.Model):
+    parking = models.CharField(max_length=4, blank=True, null=True)
+    internet = models.CharField(max_length=4, blank=True, null=True)
+    pets = models.CharField(max_length=4, blank=True, null=True)
+    aircond = models.CharField(max_length=4, blank=True, null=True)
+    heating = models.CharField(max_length=4, blank=True, null=True)
+    laundry = models.CharField(max_length=20, blank=True, null=True)
+    streamingservices = models.CharField(max_length=4, blank=True, null=True)
+    addamenityinfo = models.CharField(max_length=300, blank=True, null=True)
+    
