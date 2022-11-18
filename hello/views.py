@@ -32,7 +32,12 @@ def about(request):
     return render(request, "hello/about.html")
 
 def listing(request):
-    return render(request, "hello/listing.html")
+    ammenities_list = amenityinfo.objects.last()
+    return render(request, "hello/listing.html", {'ammenities_list': ammenities_list})
+
+def test(request):
+    ammenities_list = amenityinfo.objects.last()
+    return render(request, "hello/test.html", {'ammenities_list': ammenities_list})
 
 def display(request):
     print('test')
@@ -56,7 +61,7 @@ def display(request):
     addressinformation(address = add, city = cit, zip = zip).save()
     rentinformation(monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc).save()
     amenityinfo(parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc,).save()
-    return HttpResponse(message)
+    return HttpResponse("Form Submitted!")
     
 
 def hello_there(request, name):
@@ -83,3 +88,9 @@ def log_message(request):
             return redirect("home")
     else:
         return render(request, "hello/log_message.html", {"form": form}) 
+    
+
+
+
+# if __name__ == '__main__':
+#     all_ammenities()

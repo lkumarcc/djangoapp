@@ -48,7 +48,7 @@ class addListings(models.Model):
 class addressinformation(models.Model):
     address = models.CharField(max_length=200, blank=True, null=True)
     city = models.CharField(max_length=200, blank=True, null=True)
-    zip = models.IntegerField(blank=True, null=True)
+    zip = models.IntegerField( blank=True, null=True)
     
 class rentinformation(models.Model):
     monthlyprice = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
