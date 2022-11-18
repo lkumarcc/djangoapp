@@ -33,11 +33,13 @@ def about(request):
 
 def listing(request):
     ammenities_list = amenityinfo.objects.last()
-    return render(request, "hello/listing.html", {'ammenities_list': ammenities_list})
+    rent_list = rentinformation.objects.last()
+    return render(request, "hello/listing.html", {'ammenities_list': ammenities_list,  'rent_list': rent_list})
 
 def test(request):
     ammenities_list = amenityinfo.objects.last()
-    return render(request, "hello/test.html", {'ammenities_list': ammenities_list})
+    rent_list = rentinformation.objects.last()
+    return render(request, "hello/test.html", {'ammenities_list': ammenities_list,  'rent_list': rent_list})
 
 def display(request):
     print('test')
@@ -61,7 +63,7 @@ def display(request):
     addressinformation(address = add, city = cit, zip = zip).save()
     rentinformation(monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc).save()
     amenityinfo(parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc,).save()
-    return HttpResponse("Form Submitted!")
+    return render(request, "hello/test.html")
     
 
 def hello_there(request, name):

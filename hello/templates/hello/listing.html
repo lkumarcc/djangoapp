@@ -124,7 +124,7 @@
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <!-- User indicates yes/no on form for pre filled fields -->
                     <h1 class="mb-4">Amenities</h1>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-person.png'%}" alt="Icon" style="width: 30px; height: 30px;"> Gender (Fluid/Female-Only/Male-Only): Yes</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-person.png'%}" alt="Icon" style="width: 30px; height: 30px;"> Gender (Fluid/Female-Only/Male-Only): {{rent_list.gender}}</p>
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-parking.png'%}" alt="Icon" style="width: 30px; height: 30px;">Parking: {{ammenities_list.parking}}</p>
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-wifi.png'%}" alt="Icon" style="width: 30px; height: 30px;">Internet: {{ammenities_list.internet}}</p>
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-pet.png'%}" alt="Icon" style="width: 30px; height: 30px;">Pets: {{ammenities_list.pets}}</p>
@@ -135,7 +135,7 @@
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-misc.png'%}" alt="Icon" style="width: 30px; height: 30px;">Etc: {{ammenities_list.addamenityinfo}}</p>
                     <!-- Security Deposit-->
                     <p class="mb-4">Further details regarding Amenities. Ex. Limited to two pets!</p>
-                    <p class="mb-4">Security Deposit: $100</p>
+                    <p class="mb-4">Security Deposit: {{rent_list.securitydeposit}}</p>
                     <button class="btn btn-primary py-1 px-3 me-1 animated fadeIn">                        
                         <img class="img-fluid" src="{% static 'hello/images/icon-favorite.png'%}" alt="Icon" style="width: 60px; height: 60px;">
                         Favorite
