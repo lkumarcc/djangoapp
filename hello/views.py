@@ -31,6 +31,12 @@ def add_listing(request):
 def about(request):
     return render(request, "hello/about.html")
 
+def create_acc(request):
+    return render(request, "hello/create_acc.html")
+
+def login_home(request):
+    return render(request, "hello/login_home.html")
+    
 def listing(request):
     ammenities_list = amenityinfo.objects.last()
     rent_list = rentinformation.objects.last()

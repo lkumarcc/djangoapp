@@ -22,6 +22,8 @@ urlpatterns = [
     path("add_listing/", views.add_listing, name="add_listing"),
     path("display/", views.display, name="display"),
     path("test/", views.test, name="test"),
+    path("create_acc/", views.create_acc, name="create_acc"),
+    path("login_home/", views.login_home, name="login_home"), 
     # path("all-ammenities/", views.all_ammenities, name="all_amenities")
 
     
