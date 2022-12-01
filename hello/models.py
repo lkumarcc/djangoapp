@@ -66,4 +66,9 @@ class amenityinfo(models.Model):
     laundry = models.CharField(max_length=20, blank=True, null=True)
     streamingservices = models.CharField(max_length=4, blank=True, null=True)
     addamenityinfo = models.CharField(max_length=300, blank=True, null=True)
-    
+
+class Userinfo(models.Model):
+    userfirst = models.CharField(max_length=12, blank=True, null=True)
+    userlast = models.CharField(max_length=12, blank=True, null=True)
+    username = models.CharField(max_length=12, blank=True, null=True)
+    userpass = models.CharField(max_length=12, blank=True, null=True)
