@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from hello.forms import LogMessageForm
 from hello.models import LogMessage
 from django.views.generic import ListView
-from .models import Profile, addListings, addressinformation, rentinformation, amenityinfo
+from .models import Profile, addListings, addressinformation, rentinformation, amenityinfo, Userinfo
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
@@ -98,7 +98,19 @@ def log_message(request):
         return render(request, "hello/log_message.html", {"form": form}) 
     
 
+def userdisplay(request):
+    print('test')
+    first = request.POST.get("firstbane")
+    last = request.POST.get("lastname")
+    uname = request.POST.get("username")
+    passw = request.POST.get("password")
+    email = request.POST.get("email")
+    phone = request.POST.get("phone")
+    gen = request.POST.get("gender")
 
+    Userinfo(firstname = first, lastname = last, username = uname, password = passw, email = email, phone = phone, gender = gen).save()
+
+    return render(request, "hello/test.html")
 
 # if __name__ == '__main__':
 #     all_ammenities()
