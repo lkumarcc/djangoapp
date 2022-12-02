@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-#_v988pu00v1)*p3ua8#_2t@mllq9&q+fv6yqey=h9l3cq9^^l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['universitysubletting.herokuapp.com']
+ALLOWED_HOSTS = ['universitysubletting.herokuapp.com', '127.0.0.1']
 
 #defines a location where static files are collected when you use the collectstatic command:
 STATIC_ROOT = BASE_DIR / 'static_collected'
