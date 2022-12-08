@@ -100,7 +100,7 @@ def log_message(request):
 
 def userdisplay(request):
     print('test')
-    first = request.POST.get("firstbane")
+    first = request.POST.get("firstname")
     last = request.POST.get("lastname")
     uname = request.POST.get("username")
     passw = request.POST.get("password")
