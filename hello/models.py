@@ -68,7 +68,7 @@ class amenityinfo(models.Model):
     addamenityinfo = models.CharField(max_length=300, blank=True, null=True)
 
 class Userinfo(models.Model):
-    email = models.CharField(max_length=20, blank=True, null=True)
+    email = models.CharField(max_length=30, blank=True, null=True)
     phone = models.IntegerField(blank=True, null=True)
     gender = models.CharField(max_length=12, blank=True, null=True)
     firstname = models.CharField(max_length=12, blank=True, null=True)
