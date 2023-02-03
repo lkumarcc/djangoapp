@@ -67,7 +67,7 @@ class amenityinfo(models.Model):
     streamingservices = models.CharField(max_length=4, blank=True, null=True)
     addamenityinfo = models.CharField(max_length=300, blank=True, null=True)
 
-class Userinfo(models.Model):
+class userinfo(models.Model):
     email = models.CharField(max_length=30, blank=True, null=True)
     phone = models.IntegerField(blank=True, null=True)
     gender = models.CharField(max_length=12, blank=True, null=True)

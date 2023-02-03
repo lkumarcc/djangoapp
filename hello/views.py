@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from hello.forms import LogMessageForm
 from hello.models import LogMessage
 from django.views.generic import ListView
-from .models import Profile, addListings, addressinformation, rentinformation, amenityinfo, Userinfo
+from .models import Profile, addListings, addressinformation, rentinformation, amenityinfo, userinfo
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
@@ -108,7 +108,7 @@ def userdisplay(request):
     phone = request.POST.get("phone")
     gen = request.POST.get("gender")
 
-    Userinfo(firstname = first, lastname = last, username = uname, password = passw, email = email, phone = phone, gender = gen).save()
+    userinfo(firstname = first, lastname = last, username = uname, password = passw, email = email, phone = phone, gender = gen).save()
 
     return render(request, "hello/test.html")
 
