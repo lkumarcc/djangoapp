@@ -113,4 +113,4 @@ def userdisplay(request):
     return render(request, "hello/test.html")
 
 # if __name__ == '__main__':
-#     all_ammenities()
+#     all_ammenities() 
