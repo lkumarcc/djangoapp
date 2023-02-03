@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Profile
 from .models import addListings
+from .models import userinfo
 
 # Register your models here.
 
@@ -24,3 +25,4 @@ admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)
 admin.site.register(Profile)
 admin.site.register(addListings)
+admin.site.register(userinfo) 
