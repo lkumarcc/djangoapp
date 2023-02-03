@@ -76,4 +76,4 @@ class Userinfo(models.Model):
     username = models.CharField(max_length=12, blank=True, null=True)
     password = models.CharField(max_length=12, blank=True, null=True)
     
-#test
+#test 
