@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Profile
 from .models import addListings
 from .models import userinfo
-
+from .models import Shome
 # Register your models here.
 
 from django.contrib.auth.models import User, Group
@@ -26,3 +26,4 @@ admin.site.unregister(Group)
 admin.site.register(Profile)
 admin.site.register(addListings)
 admin.site.register(userinfo) 
+admin.site.register(Shome)

@@ -6,15 +6,32 @@ from django.shortcuts import redirect
 from hello.forms import LogMessageForm
 from hello.models import LogMessage
 from django.views.generic import ListView
-from .models import Profile, addListings, addressinformation, rentinformation, amenityinfo, userinfo
+from .models import Profile, addListings, addressinformation, rentinformation, amenityinfo, userinfo, Shome
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
     model = LogMessage
+    #this cant be inside here but theres nowhere else to put it, need new homepage
+    '''
+    def seedhome(request):
+        shome_list = Shome.objects.last()
+        return render(request, 'hello/home.html', {'shome_list': shome_list})
+    '''
 
     def get_context_data(self, **kwargs):
         context = super(HomeListView, self).get_context_data(**kwargs)
         return context
+
+    
+
+    '''
+    Shome(1, "apartment", 800, '100 golden oak ave', 600 , 3, 1).save()
+    Shome(2, "house", 1270, '2238 jefferson ave', 800 , 4, 2).save()
+    Shome(3, "apartment", 745, '600 prytania st', 745 , 3, 1).save()
+    Shome(4, "house", 1200, '2330 state st', 1200 , 5, 3).save()
+    Shome(5, "apartment", 750, '420 pine st', 750 , 1, 1).save()
+    Shome(6, "house", 900, '657 magazine st', 900 , 2, 1).save()
+    '''
 
 def profile(request):
     return render(request, "hello/profile.html")
@@ -112,5 +129,9 @@ def userdisplay(request):
 
     return render(request, "hello/test.html")
 
+
+def seedhome(request):
+    shome_list = Shome.objects.last()
+    return render(request, 'hello/home.html', {'shome_list': shome_list})
 # if __name__ == '__main__':
 #     all_ammenities() 

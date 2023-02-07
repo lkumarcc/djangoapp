@@ -4,6 +4,8 @@ from hello import views
 from hello.models import LogMessage
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+
+#might need to move this into url patterns
 home_list_view = views.HomeListView.as_view(
     queryset=LogMessage.objects.order_by("-log_date")[:5],  # :5 limits the results to the five most recent
     context_object_name="message_list",

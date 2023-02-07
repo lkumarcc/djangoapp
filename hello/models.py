@@ -34,7 +34,7 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
     
-    22
+    
     
 class addListings(models.Model):
     address = models.CharField(max_length=200, blank=True, null=True)
@@ -76,5 +76,12 @@ class userinfo(models.Model):
     username = models.CharField(max_length=12, blank=True, null=True)
     password = models.CharField(max_length=12, blank=True, null=True)
     
+class Shome(models.Model):
+    hometype = models.CharField(max_length=100, blank=True, null=True)
+    price = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
+    addy = models.CharField(max_length=100, blank=True, null=True)
+    size = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
+    beds = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
+    bath = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
     
 #test 
