@@ -3,7 +3,7 @@ from django.utils.timezone import datetime
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
-from hello.forms import LogMessageForm
+from hello.forms import LogMessageForm, CreateUserForm
 from hello.models import LogMessage
 from django.views.generic import ListView
 from .models import Profile, addListings, addressinformation, rentinformation, amenityinfo, userinfo, Shome
@@ -116,18 +116,21 @@ def log_message(request):
     
 
 def userdisplay(request):
-    print('test')
-    first = request.POST.get("firstname")
-    last = request.POST.get("lastname")
-    uname = request.POST.get("username")
-    passw = request.POST.get("password")
-    email = request.POST.get("email")
-    phone = request.POST.get("phone")
-    gen = request.POST.get("gender")
-
-    userinfo(firstname = first, lastname = last, username = uname, password = passw, email = email, phone = phone, gender = gen).save()
-
-    return render(request, "hello/test.html")
+    form = CreateUserForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            message = form.save(commit=False)
+            first = request.POST.get("firstname")
+            last = request.POST.get("lastname")
+            uname = request.POST.get("username")
+            passw = request.POST.get("password")
+            email = request.POST.get("email")
+            phone = request.POST.get("phone")
+            gen = request.POST.get("gender")
+    
+            userinfo(firstname = first, lastname = last, username = uname, password = passw, email = email, phone = phone, gender = gen).save()
+        else:
+            return render(request, "hello/test.html")
 
 
 def seedhome(request):
