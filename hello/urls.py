@@ -13,7 +13,8 @@ home_list_view = views.HomeListView.as_view(
 )
 
 urlpatterns = [
-    path("", home_list_view, name="home"),
+    path("", views.login_home, name="login_home"),
+    path("home/", home_list_view, name="home"),
     path("about/", views.about, name="about"),
     path("hello/<name>", views.hello_there, name="hello_there"),
     path("profile/", views.profile, name="profile"),
@@ -24,7 +25,7 @@ urlpatterns = [
     path("display/", views.display, name="display"),
     path("test/", views.test, name="test"),
     path("create_acc/", views.create_acc, name="create_acc"),
-    path("login_home/", views.login_home, name="login_home"), 
+    # path("login_home/", views.login_home, name="login_home"), 
     # path("all-ammenities/", views.all_ammenities, name="all_amenities")
 
     
