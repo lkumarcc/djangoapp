@@ -10,5 +10,5 @@ class LogMessageForm(forms.ModelForm):
 class CreateUserForm(forms.ModelForm):
     class Meta:
         model = userinfo
-        fields = ("email", "phone", "gender", "firstname", "lastname", "username",)
+        fields = ("email", "phone", "gender", "firstname", "lastname", "username","password",)
         
