@@ -1,20 +1,20 @@
 from django.urls import path
 from hello import views
 
-from hello.models import LogMessage
+from hello.models import LogMessage, Shome
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 #might need to move this into url patterns
 home_list_view = views.HomeListView.as_view(
-    queryset=LogMessage.objects.order_by("-log_date")[:5],  # :5 limits the results to the five most recent
+    queryset=Shome.objects.order_by("id")[:5],  # :5 limits the results to the five most recent
     context_object_name="message_list",
     template_name="hello/home.html",
 )
-
+    # path("home/", home_list_view, name="home"),
 urlpatterns = [
     path("", views.login_home, name="login_home"),
-    path("home/", home_list_view, name="home"),
+    path("home/", views.seedhome, name="home"),
     path("about/", views.about, name="about"),
     path("hello/<name>", views.hello_there, name="hello_there"),
     path("profile/", views.profile, name="profile"),

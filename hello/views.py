@@ -12,15 +12,15 @@ class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
     model = LogMessage
     #this cant be inside here but theres nowhere else to put it, need new homepage
-    '''
-    def seedhome(request):
-        shome_list = Shome.objects.last()
-        return render(request, 'hello/home.html', {'shome_list': shome_list})
-    '''
+    
+def seedhome(request):
+    shome_list = Shome.objects.last()
+    return render(request, 'hello/home.html', {'shome_list': shome_list})
+    
 
-    def get_context_data(self, **kwargs):
-        context = super(HomeListView, self).get_context_data(**kwargs)
-        return context
+# def get_context_data(self, **kwargs):
+#     context = super(HomeListView, self).get_context_data(**kwargs)
+#     return context
 
     
 
