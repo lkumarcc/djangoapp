@@ -145,20 +145,16 @@ def authenticateuser(request):
         if form.is_valid():
             checkemail = request.POST.get("email")
             checkpassword = request.POST.get("password")
-            # print(checkemail, "2", checkpassword)
-            # return render(request, "hello/home.html")
         else:
             return render(request, "hello/test.html")
-    userdata = userinfo.objects.filter(email=checkemail).values()[0]
-    print("test", userdata)
-    if userdata != None:
-        email, password = userdata["email"], userdata["password"]
-        if checkpassword == password:
+    if userinfo.objects.filter(email=checkemail).exists():
+        userdata = userinfo.objects.filter(email=checkemail).values()[0]
+        if userdata["password"] == checkpassword:
             return render(request, "hello/home.html")
         else:
-            return render(request, "hello/test.html")
+            return render(request, "hello/create_acc.html")
     else:
-        return render(request, "hello/test.html")
+        return render(request, "hello/create_acc.html")
             
             
             
