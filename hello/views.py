@@ -7,6 +7,8 @@ from hello.forms import LogMessageForm, CreateUserForm
 from hello.models import LogMessage
 from django.views.generic import ListView
 from .models import Profile, addListings, addressinformation, rentinformation, amenityinfo, userinfo, Shome
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
@@ -127,7 +129,11 @@ def userdisplay(request):
             email = request.POST.get("email")
             phone = request.POST.get("phone")
             gen = request.POST.get("gender")
-            userinfo(firstname = first, lastname = last, username = uname, password = passw, email = email, phone = phone, gender = gen).save()
+            # userinfo(firstname = first, lastname = last, username = uname, password = passw, email = email, phone = phone, gender = gen).save()
+            user = User.objects.create_user(uname, email, passw)
+            user.first_name = first
+            user.last_name = last
+            user.save()
             return render(request, "hello/login_home.html")
         else:
             return render(request, "hello/test.html")
@@ -143,23 +149,34 @@ def authenticateuser(request):
     form = CreateUserForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
-            checkemail = request.POST.get("email")
+            checkusername = request.POST.get("username")
             checkpassword = request.POST.get("password")
         else:
+            print("test")
             return render(request, "hello/test.html")
-    if userinfo.objects.filter(email=checkemail).exists():
-        userdata = userinfo.objects.filter(email=checkemail).values()[0]
-        if userdata["password"] == checkpassword:
-            return render(request, "hello/home.html")
-        else:
-            return render(request, "hello/create_acc.html")
+    print(checkusername, checkpassword)
+    user = authenticate(username=checkusername, password=checkpassword)
+    if user is not None:
+       return render(request, "hello/home.html")
     else:
         return render(request, "hello/create_acc.html")
-            
+
+
+# if userinfo.objects.filter(email=checkemail).exists():
+#         userdata = userinfo.objects.filter(email=checkemail).values()[0]
+#         print(userdata["password"])
+#         if userdata["password"] == checkpassword:
+#             return render(request, "hello/home.html")
+#         else:
+#             return render(request, "hello/create_acc.html")
+#     else:
+#         return render(request, "hello/test.html")
             
             
             
             
         
+ 
+    
     
     
