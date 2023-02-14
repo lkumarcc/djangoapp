@@ -31,7 +31,7 @@
                 <p class="text-white-50 mb-5">Please enter your information!</p>
 
                 
-                <form action = "/login_home/" method = "post">
+                <form action = "/userdisplay/" method = "post">
                   {% csrf_token %}
                     <p><label for="email" style="display:inline-block; width:100px" >School Email:</label><input type="text" id="email" name="email" style="margin-bottom:10px; margin-left:5px " pattern = "[a-zA-Z0-9]+@[a-zA-Z]+.edu" required></p>
                     <p><label for="firstname" style="display:inline-block; width:100px">First Name:</label><input type="text" id="firstname" name="firstname" style="margin-bottom:10px; margin-left:5px" required></p>

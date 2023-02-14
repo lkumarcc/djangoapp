@@ -119,7 +119,7 @@ def userdisplay(request):
     form = CreateUserForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
-            message = form.save(commit=False)
+            # message = form.save(commit=False)
             first = request.POST.get("firstname")
             last = request.POST.get("lastname")
             uname = request.POST.get("username")
@@ -127,8 +127,8 @@ def userdisplay(request):
             email = request.POST.get("email")
             phone = request.POST.get("phone")
             gen = request.POST.get("gender")
-    
             userinfo(firstname = first, lastname = last, username = uname, password = passw, email = email, phone = phone, gender = gen).save()
+            return render(request, "hello/login_home.html")
         else:
             return render(request, "hello/test.html")
 
@@ -138,3 +138,32 @@ def seedhome(request):
     return render(request, 'hello/home.html', {'shome_list': shome_list})
 # if __name__ == '__main__':
 #     all_ammenities() 
+
+def authenticateuser(request):
+    form = CreateUserForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            checkemail = request.POST.get("email")
+            checkpassword = request.POST.get("password")
+            # print(checkemail, "2", checkpassword)
+            # return render(request, "hello/home.html")
+        else:
+            return render(request, "hello/test.html")
+    userdata = userinfo.objects.filter(email=checkemail).values()[0]
+    print("test", userdata)
+    if userdata != None:
+        email, password = userdata["email"], userdata["password"]
+        if checkpassword == password:
+            return render(request, "hello/home.html")
+        else:
+            return render(request, "hello/test.html")
+    else:
+        return render(request, "hello/test.html")
+            
+            
+            
+            
+            
+        
+    
+    
