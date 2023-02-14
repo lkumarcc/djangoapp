@@ -25,7 +25,9 @@ urlpatterns = [
     path("display/", views.display, name="display"),
     path("test/", views.test, name="test"),
     path("create_acc/", views.create_acc, name="create_acc"),
-    # path("login_home/", views.login_home, name="login_home"), 
+    path("login_home/", views.login_home, name="login_home"), 
+    path("userdisplay/", views.userdisplay, name="userdisplay"),
+    path("authenticateuser/", views.authenticateuser, name="authenticateuser"), 
     # path("all-ammenities/", views.all_ammenities, name="all_amenities")
 
     
