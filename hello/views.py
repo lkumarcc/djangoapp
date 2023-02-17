@@ -47,6 +47,9 @@ def favorites(request):
 def add_listing(request):
     return render(request, "hello/add_listing.html")
 
+def edit_listing(request):
+    return render(request, "hello/edit_listing.html")
+
 def about(request):
     return render(request, "hello/about.html")
 
