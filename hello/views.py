@@ -62,6 +62,10 @@ def listing(request):
     rent_list = rentinformation.objects.last()
     return render(request, "hello/listing.html", {'ammenities_list': ammenities_list,  'rent_list': rent_list})
 
+def edit_listing(request):
+    return render(request, "hello/edit_listing.html")
+
+
 def test(request):
     ammenities_list = amenityinfo.objects.last()
     rent_list = rentinformation.objects.last()
