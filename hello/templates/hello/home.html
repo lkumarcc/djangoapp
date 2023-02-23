@@ -4,6 +4,7 @@
 {% endblock %}
 {% load static %}
 {% block content %}
+
     <head>
         <title>Home</title>
         <meta charset="utf-8"/>
@@ -116,6 +117,12 @@
                     </ul>
                 </div>
             </div>
+
+
+
+
+
+            {%for shome_list in shome_list%}
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
@@ -152,7 +159,6 @@
                                     <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>{{listing.bath}}</small>
                                 </div>
                             </div>
-
                         </div>
                         {% endfor %}
             

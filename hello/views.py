@@ -15,7 +15,7 @@ class HomeListView(ListView):
     model = LogMessage
     #this cant be inside here but theres nowhere else to put it, need new homepage
     
-def seedhome(request):
+def home(request):
     shome_list = Shome.objects.all()
     return render(request, 'hello/home.html', {'shome_list': shome_list})
     
@@ -47,9 +47,6 @@ def favorites(request):
 
 def add_listing(request):
     return render(request, "hello/add_listing.html")
-
-def edit_listing(request):
-    return render(request, "hello/edit_listing.html")
 
 def about(request):
     return render(request, "hello/about.html")
@@ -141,6 +138,9 @@ def userdisplay(request):
             return render(request, "hello/login_home.html")
         else:
             return render(request, "hello/test.html")
+
+
+
 # if __name__ == '__main__':
 #     all_ammenities() 
 

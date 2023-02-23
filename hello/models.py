@@ -46,11 +46,13 @@ class addListings(models.Model):
     
 
 class addressinformation(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,)
     address = models.CharField(max_length=200, blank=True, null=True)
     city = models.CharField(max_length=200, blank=True, null=True)
     zip = models.IntegerField( blank=True, null=True)
     
 class rentinformation(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     monthlyprice = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
     securitydeposit = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
     numbertenants = models.IntegerField(blank=True, null=True)
@@ -58,6 +60,7 @@ class rentinformation(models.Model):
     addrentinfo = models.CharField(max_length=300, blank=True, null=True)
     
 class amenityinfo(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     parking = models.CharField(max_length=4, blank=True, null=True)
     internet = models.CharField(max_length=4, blank=True, null=True)
     pets = models.CharField(max_length=4, blank=True, null=True)
@@ -69,13 +72,13 @@ class amenityinfo(models.Model):
 
 class userinfo(models.Model):
     email = models.CharField(max_length=30, blank=True, null=True)
-    phone = models.IntegerField(blank=True, null=True)
+    phone = models.CharField(max_length=12, blank=True, null=True)
     gender = models.CharField(max_length=12, blank=True, null=True)
     firstname = models.CharField(max_length=12, blank=True, null=True)
     lastname = models.CharField(max_length=12, blank=True, null=True)
     username = models.CharField(max_length=12, blank=True, null=True)
     password = models.CharField(max_length=12, blank=True, null=True)
-    
+    # models.IntegerField(blank=True, null=True)
 class Shome(models.Model):
     hometype = models.CharField(max_length=100, blank=True, null=True)
     price = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
