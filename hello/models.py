@@ -81,10 +81,10 @@ class userinfo(models.Model):
     # models.IntegerField(blank=True, null=True)
 class Shome(models.Model):
     hometype = models.CharField(max_length=100, blank=True, null=True)
-    price = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
+    price = models.IntegerField( blank=True, null=True)
     addy = models.CharField(max_length=100, blank=True, null=True)
-    size = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
-    beds = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
-    bath = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
+    size = models.IntegerField( blank=True, null=True)
+    beds = models.IntegerField( blank=True, null=True)
+    bath = models.DecimalField(max_digits = 100, decimal_places=1, blank=True, null=True)
     
 #test 
