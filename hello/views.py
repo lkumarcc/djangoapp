@@ -16,7 +16,7 @@ class HomeListView(ListView):
     #this cant be inside here but theres nowhere else to put it, need new homepage
     
 def seedhome(request):
-    shome_list = Shome.objects.last()
+    shome_list = Shome.objects.all()
     return render(request, 'hello/home.html', {'shome_list': shome_list})
     
 
@@ -36,7 +36,8 @@ def seedhome(request):
     '''
 
 def profile(request):
-    return render(request, "hello/profile.html")
+    user_list = userinfo.objects.last()
+    return render(request, "hello/profile.html", {'user': user_list})
 
 def messages(request):
     return render(request, "hello/messages.html")
@@ -140,11 +141,6 @@ def userdisplay(request):
             return render(request, "hello/login_home.html")
         else:
             return render(request, "hello/test.html")
-
-
-def seedhome(request):
-    shome_list = Shome.objects.last()
-    return render(request, 'hello/home.html', {'shome_list': shome_list})
 # if __name__ == '__main__':
 #     all_ammenities() 
 
