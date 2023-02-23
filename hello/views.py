@@ -8,15 +8,15 @@ from hello.models import LogMessage
 from django.views.generic import ListView
 from .models import Profile, addListings, addressinformation, rentinformation, amenityinfo, userinfo, Shome
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
     model = LogMessage
     #this cant be inside here but theres nowhere else to put it, need new homepage
     
-def seedhome(request):
-    shome_list = Shome.objects.last()
+def home(request):
+    shome_list = Shome.objects.all()
     return render(request, 'hello/home.html', {'shome_list': shome_list})
     
 
@@ -46,9 +46,6 @@ def favorites(request):
 
 def add_listing(request):
     return render(request, "hello/add_listing.html")
-
-def edit_listing(request):
-    return render(request, "hello/edit_listing.html")
 
 def about(request):
     return render(request, "hello/about.html")
@@ -142,9 +139,7 @@ def userdisplay(request):
             return render(request, "hello/test.html")
 
 
-def seedhome(request):
-    shome_list = Shome.objects.last()
-    return render(request, 'hello/home.html', {'shome_list': shome_list})
+
 # if __name__ == '__main__':
 #     all_ammenities() 
 
@@ -159,10 +154,8 @@ def authenticateuser(request):
             return render(request, "hello/test.html")
     print(checkusername, checkpassword)
     user = authenticate(username=checkusername, password=checkpassword)
-    
     if user is not None:
-        login(request, user)
-        return render(request, "hello/home.html")
+       return render(request, "hello/home.html")
     else:
         return render(request, "hello/create_acc.html")
 
