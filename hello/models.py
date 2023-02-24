@@ -50,10 +50,14 @@ class allinformation(models.Model):
     address = models.CharField(max_length=200, blank=True, null=True)
     city = models.CharField(max_length=200, blank=True, null=True)
     zip = models.IntegerField( blank=True, null=True)
+    hometype = models.CharField(max_length=100, blank=True, null=True)
     monthlyprice = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
     securitydeposit = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
     numbertenants = models.IntegerField(blank=True, null=True)
     gender = models.CharField(max_length=20, blank=True, null=True)
+    beds = models.IntegerField( blank=True, null=True)
+    size = models.IntegerField( blank=True, null=True)
+    bath = models.DecimalField(max_digits = 100, decimal_places=1, blank=True, null=True)
     addrentinfo = models.CharField(max_length=300, blank=True, null=True)
     parking = models.CharField(max_length=4, blank=True, null=True)
     internet = models.CharField(max_length=4, blank=True, null=True)
@@ -64,11 +68,9 @@ class allinformation(models.Model):
     streamingservices = models.CharField(max_length=4, blank=True, null=True)
     addamenityinfo = models.CharField(max_length=300, blank=True, null=True)
     #need to upate forms to account for hometype, size, beds, bath
-    hometype = models.CharField(max_length=100, blank=True, null=True)
-    size = models.IntegerField( blank=True, null=True)
-    beds = models.IntegerField( blank=True, null=True)
-    bath = models.DecimalField(max_digits = 100, decimal_places=1, blank=True, null=True)
     
+   
+   
     
    
     
