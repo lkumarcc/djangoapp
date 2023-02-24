@@ -43,6 +43,36 @@ class addListings(models.Model):
     price = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
     rooms = models.IntegerField(max_length=200, blank=True, null=True)
     file = models.FileField
+
+#new class that takes in all of the info for address info, rent info, amenity info, shome
+class allinformation(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    address = models.CharField(max_length=200, blank=True, null=True)
+    city = models.CharField(max_length=200, blank=True, null=True)
+    zip = models.IntegerField( blank=True, null=True)
+    monthlyprice = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
+    securitydeposit = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
+    numbertenants = models.IntegerField(blank=True, null=True)
+    gender = models.CharField(max_length=20, blank=True, null=True)
+    addrentinfo = models.CharField(max_length=300, blank=True, null=True)
+    parking = models.CharField(max_length=4, blank=True, null=True)
+    internet = models.CharField(max_length=4, blank=True, null=True)
+    pets = models.CharField(max_length=4, blank=True, null=True)
+    aircond = models.CharField(max_length=4, blank=True, null=True)
+    heating = models.CharField(max_length=4, blank=True, null=True)
+    laundry = models.CharField(max_length=20, blank=True, null=True)
+    streamingservices = models.CharField(max_length=4, blank=True, null=True)
+    addamenityinfo = models.CharField(max_length=300, blank=True, null=True)
+    #need to upate forms to account for hometype, size, beds, bath
+    hometype = models.CharField(max_length=100, blank=True, null=True)
+    size = models.IntegerField( blank=True, null=True)
+    beds = models.IntegerField( blank=True, null=True)
+    bath = models.DecimalField(max_digits = 100, decimal_places=1, blank=True, null=True)
+    
+    
+   
+    
+    
     
 
 class addressinformation(models.Model):

@@ -7,7 +7,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 #might need to move this into url patterns
 home_list_view = views.HomeListView.as_view(
-    queryset=Shome.objects.order_by("id")[:5],  # :5 limits the results to the five most recent
+    #queryset=Shome.objects.order_by("id")[:5],  # :5 limits the results to the five most recent
     context_object_name="message_list",
     template_name="hello/home.html",
 )
