@@ -18,7 +18,6 @@ class HomeListView(ListView):
 def home(request):
     shome_list = Shome.objects.all()
     return render(request, 'hello/home.html', {'shome_list': shome_list})
-    
 
 # def get_context_data(self, **kwargs):
 #     context = super(HomeListView, self).get_context_data(**kwargs)
@@ -60,11 +59,14 @@ def login_home(request):
 def listing(request):
     ammenities_list = amenityinfo.objects.last()
     rent_list = rentinformation.objects.last()
-    return render(request, "hello/listing.html", {'ammenities_list': ammenities_list,  'rent_list': rent_list})
+    addyinfo = addressinformation.objects.last()
+    return render(request, "hello/listing.html", {'ammenities_list': ammenities_list,  'rent_list': rent_list, "addyinfo": addyinfo})
 
 def edit_listing(request):
-    return render(request, "hello/edit_listing.html")
-
+    rentinfo = rentinformation.objects.last() #goes to rentinformation class in models.py, gets objects from there
+    amenities = amenityinfo.objects.last()
+    addyinfo = addressinformation.objects.last()
+    return render(request, 'hello/edit_listing.html', {'rentinfo': rentinfo, 'amenities': amenities, 'addyinfo': addyinfo})
 
 def test(request):
     ammenities_list = amenityinfo.objects.last()
