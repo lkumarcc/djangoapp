@@ -16,7 +16,7 @@ class HomeListView(ListView):
     #this cant be inside here but theres nowhere else to put it, need new homepage
 
 def home(request):
-    shome_list = Shome.objects.all()
+    shome_list = allinformation.objects.all()
     return render(request, 'hello/home.html', {'shome_list': shome_list})
 
 
@@ -71,12 +71,13 @@ def login_home(request):
 
 
 def listing(request):
-    addyinfo = allinformation.objects.last()
+    
+    addyinfo = allinformation.objects.filter(user=request.user).last()
         
     return render(request, "hello/listing.html", {'addyinfo': addyinfo,})
 
 def edit_listing(request):
-    addyinfo = allInfoDisplay.objects.last()
+    addyinfo = allinformation.objects.last()
         
     return render(request, "hello/edit_listing.html", {'addyinfo': addyinfo,})
 
