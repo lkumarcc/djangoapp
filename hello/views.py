@@ -35,8 +35,7 @@ def home(request):
     '''
 
 def profile(request):
-    user_list = userinfo.objects.last()
-    return render(request, "hello/profile.html", {'user': user_list})
+    return render(request, "hello/profile.html")
 
 def messages(request):
     return render(request, "hello/messages.html")
