@@ -28,11 +28,7 @@ def create_profile(sender, instance, created, **kwargs):
 # to couple each profile to exactly one user
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    follows = models.ManyToManyField(
-        "self", related_name="followed_by",symmetrical=False,blank=True
-    )
-    def __str__(self):
-        return self.user.username
+    
     
     
     
@@ -46,7 +42,7 @@ class addListings(models.Model):
 
 #new class that takes in all of the info for address info, rent info, amenity info, shome
 class allinformation(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     address = models.CharField(max_length=200, blank=True, null=True)
     city = models.CharField(max_length=200, blank=True, null=True)
     zip = models.IntegerField( blank=True, null=True)

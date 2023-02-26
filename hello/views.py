@@ -42,11 +42,8 @@ def allInfoDisplay(request):
     tv = request.POST.get("tv")
     ammetc = request.POST.get("etc")
     image = request.POST.get("file")
-    allinformation(address = add, city = cit, zip = zip,hometype = hometype, beds = beds, size = size, bath = bath,monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc, parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc).save()
-    # addressinformation = (address = add, city = cit, zip = zip).save()
-    # Shome = (hometype = hometype, price = pri, addy = add, beds = beds, size = size, bath = bath).save()
-    # rentinformation = (monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc).save()
-    # amenityinfo = (parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc,).save()
+    user = request.user
+    allinformation(user = user, address = add, city = cit, zip = zip,hometype = hometype, beds = beds, size = size, bath = bath,monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc, parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc).save()
     return render(request, "hello/home.html", )
 
 
@@ -78,11 +75,11 @@ def listing(request):
         
     return render(request, "hello/listing.html", {'allInfoDisplay': allInfoDisplay,})
 
-# def edit_listing(request):
-#     # rentinfo = rentinformation.objects.last() #goes to rentinformation class in models.py, gets objects from there
-#     # amenities = amenityinfo.objects.last()
-#     # addyinfo = addressinformation.objects.last()
-#     return render(request, 'hello/edit_listing.html', {'rentinfo': rentinfo, 'amenities': amenities, 'addyinfo': addyinfo})
+def edit_listing(request):
+    allInfoDisplay = allInfoDisplay.objects.last()
+        
+    return render(request, "hello/edit_listing.html", {'allInfoDisplay': allInfoDisplay,})
+
 
 def test(request):
     allInfoDisplay = allInfoDisplay.objects.last()
