@@ -8,7 +8,7 @@ from hello.models import LogMessage
 from django.views.generic import ListView
 from .models import Profile, addListings, addressinformation, rentinformation, amenityinfo, userinfo, Shome
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
@@ -162,6 +162,7 @@ def authenticateuser(request):
     print(checkusername, checkpassword)
     user = authenticate(username=checkusername, password=checkpassword)
     if user is not None:
+       login(request, user) 
        return render(request, "hello/home.html")
     else:
         return render(request, "hello/create_acc.html")
