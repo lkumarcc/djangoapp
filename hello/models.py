@@ -39,9 +39,9 @@ class Profile(models.Model):
 class addListings(models.Model):
     address = models.CharField(max_length=200, blank=True, null=True)
     city = models.CharField(max_length=200, blank=True, null=True)
-    zip = models.IntegerField(max_length=200, blank=True, null=True)
+    zip = models.IntegerField( blank=True, null=True)
     price = models.DecimalField(max_digits = 100, decimal_places=2, blank=True, null=True)
-    rooms = models.IntegerField(max_length=200, blank=True, null=True)
+    rooms = models.IntegerField( blank=True, null=True)
     file = models.FileField
 
 #new class that takes in all of the info for address info, rent info, amenity info, shome
@@ -67,18 +67,13 @@ class allinformation(models.Model):
     laundry = models.CharField(max_length=20, blank=True, null=True)
     streamingservices = models.CharField(max_length=4, blank=True, null=True)
     addamenityinfo = models.CharField(max_length=300, blank=True, null=True)
+    images = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100,blank=True, null=True )
     #need to upate forms to account for hometype, size, beds, bath
     
    
-   
-    
-   
-    
-    
-    
 
 class addressinformation(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
     address = models.CharField(max_length=200, blank=True, null=True)
     city = models.CharField(max_length=200, blank=True, null=True)
     zip = models.IntegerField( blank=True, null=True)
