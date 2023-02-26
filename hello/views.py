@@ -71,14 +71,14 @@ def login_home(request):
 
 
 def listing(request):
-    allInfoDisplay = allInfoDisplay.objects.last()
+    addyinfo = allinformation.objects.last()
         
-    return render(request, "hello/listing.html", {'allInfoDisplay': allInfoDisplay,})
+    return render(request, "hello/listing.html", {'addyinfo': addyinfo,})
 
 def edit_listing(request):
-    allInfoDisplay = allInfoDisplay.objects.last()
+    addyinfo = allInfoDisplay.objects.last()
         
-    return render(request, "hello/edit_listing.html", {'allInfoDisplay': allInfoDisplay,})
+    return render(request, "hello/edit_listing.html", {'addyinfo': addyinfo,})
 
 
 def test(request):

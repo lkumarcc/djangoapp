@@ -75,11 +75,11 @@
                 <!--<h1 class="display-5 animated fadeIn mb-4">47834 <span class="text-primary">Freret Street</span> New Orleans, LA 70118</h1>-->
                 <h1 class="display-5 animated fadeIn mb-4">{{addyinfo.address}}, <span class="text-primary">{{addyinfo.city}},</span> {{addyinfo.zip}}</h1>
                 <!-- Description -->
-                <p class="animated fadeIn mb-4 pb-2">{{rent_list.addrentinfo}} </p>
+                <p class="animated fadeIn mb-4 pb-2">{{addyinfo.addrentinfo}} </p>
                 <p class="btn btn-primary py-1 px-3 me-1 animated fadeIn">                        
                     <img class="img-fluid" src="{% static 'hello/images/icon-dollar.png'%}" alt="Icon" style="width: 50px; height: 50px;">
                     <!--Rent-->
-                    {{rent_list.monthlyprice}}/month
+                    {{addyinfo.monthlyprice}}/month
                 </p>
             </div>
             <!-- Insert Main Images Here (Outside of House, Main common areas) -->
@@ -124,17 +124,17 @@
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <!-- User indicates yes/no on form for pre filled fields -->
                     <h1 class="mb-4">Amenities</h1>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-person.png'%}" alt="Icon" style="width: 30px; height: 30px;"> Gender (Fluid/Female-Only/Male-Only): {{rent_list.gender}}</p>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-parking.png'%}" alt="Icon" style="width: 30px; height: 30px;">Parking: {{ammenities_list.parking}}</p>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-wifi.png'%}" alt="Icon" style="width: 30px; height: 30px;">Internet: {{ammenities_list.internet}}</p>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-pet.png'%}" alt="Icon" style="width: 30px; height: 30px;">Pets: {{ammenities_list.pets}}</p>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-ac.png'%}" alt="Icon" style="width: 30px; height: 30px;">Air Conditioning: {{ammenities_list.aircond}}</p>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-heat.png'%}" alt="Icon" style="width: 30px; height: 30px;">Heating: {{ammenities_list.heating}}</p>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-laundry.png'%}" alt="Icon" style="width: 30px; height: 30px;">Laundry: {{ammenities_list.laundry}}</p>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-streaming.png'%}" alt="Icon" style="width: 30px; height: 30px;">Streaming Services: {{ammenities_list.streamingservices}}</p>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-misc.png'%}" alt="Icon" style="width: 30px; height: 30px;">Additional Amenities: {{ammenities_list.addamenityinfo}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-person.png'%}" alt="Icon" style="width: 30px; height: 30px;"> Gender (Fluid/Female-Only/Male-Only): {{addyinfo.gender}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-parking.png'%}" alt="Icon" style="width: 30px; height: 30px;">Parking: {{addyinfo.parking}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-wifi.png'%}" alt="Icon" style="width: 30px; height: 30px;">Internet: {{addyinfo.internet}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-pet.png'%}" alt="Icon" style="width: 30px; height: 30px;">Pets: {{addyinfo.pets}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-ac.png'%}" alt="Icon" style="width: 30px; height: 30px;">Air Conditioning: {{addyinfo.aircond}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-heat.png'%}" alt="Icon" style="width: 30px; height: 30px;">Heating: {{addyinfo.heating}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-laundry.png'%}" alt="Icon" style="width: 30px; height: 30px;">Laundry: {{addyinfo.laundry}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-streaming.png'%}" alt="Icon" style="width: 30px; height: 30px;">Streaming Services: {{addyinfo.streamingservices}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-misc.png'%}" alt="Icon" style="width: 30px; height: 30px;">Additional Amenities: {{addyinfo.addamenityinfo}}</p>
                     <!-- Security Deposit-->
-                    <p class="mb-4">Security Deposit: {{rent_list.securitydeposit}}</p>
+                    <p class="mb-4">Security Deposit: {{addyinfo.securitydeposit}}</p>
                     <button class="btn btn-primary py-1 px-3 me-1 animated fadeIn">                        
                         <img class="img-fluid" src="{% static 'hello/images/icon-favorite.png'%}" alt="Icon" style="width: 60px; height: 60px;">
                         Favorite
