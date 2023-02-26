@@ -70,7 +70,7 @@
     <div class="container-fluid bg-white p-0">
         <div class="row g-0 flex-column-reverse flex-md-row">
             <div class="row col p-5 mt-2" style="margin-left:70px">
-                <form action = "/display/" method = "post">
+                <form action = "/allInfoDisplay/" method = "post">
                     {% csrf_token %}
                     <h1>Address Information</h1>
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-address.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="address">Address:</label><input type="text" id="address" name="address" style="margin-bottom:10px; margin-left:5px" pattern = "[0-9]+\s[a-zA-Z]?\s?[a-zA-Z]+\s[a-zA-Z]+(\s[a-zA-Z]+\s[a-zA-Z0-9]+)?$" required></p>
@@ -78,7 +78,7 @@
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-zipcode.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="zip">Zip Code:</label><input type="text" id="zip" name="zip" style="margin-bottom:10px; margin-left:5px" required></p>  
                    
                     <h1 style="margin-top:20px">Rent Information</h1>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-person.png'%}" alt="Icon" style="width: 30px; height: 30px; margin-bottom:10px"><label for="gender">Home Type: </label><select name="gender" style="margin-left:5px" required><option value="" disabled selected hidden></option><option value="Women only">Apartment</option><option value="Men only">House</option></select></p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-person.png'%}" alt="Icon" style="width: 30px; height: 30px; margin-bottom:10px"><label for="hometype">Home Type: </label><select name="gender" style="margin-left:5px" required><option value="" disabled selected hidden></option><option value="Women only">Apartment</option><option value="Men only">House</option></select></p>
 
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-lease.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="price">Monthly Lease Price: </label><input type="number" id="price" name="price" min=0 style="margin-bottom:10px; margin-left:5px" required></p>
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-deposit.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="deposit">Security Deposit: </label><input type="number" id="deposit" name="deposit" min=0 style="margin-bottom:10px; margin-left:5px" required></p>
@@ -86,9 +86,9 @@
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-person.png'%}" alt="Icon" style="width: 30px; height: 30px; margin-bottom:10px"><label for="gender">Gender: </label><select name="gender" style="margin-left:5px" required><option value="" disabled selected hidden></option><option value="Women only">Women Only</option><option value="Men only">Men Only</option><option value="All inclusive">All Inclusive</option></select></p>
 
 
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-deposit.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="deposit">Beds: </label><input type="number" id="deposit" name="deposit" min=0 style="margin-bottom:10px; margin-left:5px" required></p>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-tenants.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="rooms">Size:</label><input type="number" id="rooms" name="rooms" min=0 style="margin-bottom:10px; margin-left:5px" required></p>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-misc.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="rent_etc">Bath: </label><input type="number" id="deposit" name="deposit" min=0 style="margin-bottom:10px; margin-left:5px" required></p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-deposit.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="beds">Beds: </label><input type="number" id="deposit" name="deposit" min=0 style="margin-bottom:10px; margin-left:5px" required></p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-tenants.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="size">Size:</label><input type="number" id="rooms" name="rooms" min=0 style="margin-bottom:10px; margin-left:5px" required></p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-misc.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="bath">Bath: </label><input type="number" id="deposit" name="deposit" min=0 style="margin-bottom:10px; margin-left:5px" required></p>
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-misc.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="rent_etc">Additional Information: </label><br><textarea name="rent_etc" rows="10" cols="50" placeholder="Utilities not included in rent, upper property in duplex, two entrances to apartment, etc."></textarea></p>
 
             </div>

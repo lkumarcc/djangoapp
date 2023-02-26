@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from hello.forms import LogMessageForm, CreateUserForm
 from hello.models import LogMessage
 from django.views.generic import ListView
-from .models import Profile, addListings, addressinformation, rentinformation, amenityinfo, userinfo, Shome
+from .models import Profile, addListings, userinfo, Shome, allinformation
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
@@ -14,25 +14,41 @@ class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
     model = LogMessage
     #this cant be inside here but theres nowhere else to put it, need new homepage
-    
+
 def home(request):
     shome_list = Shome.objects.all()
     return render(request, 'hello/home.html', {'shome_list': shome_list})
 
-# def get_context_data(self, **kwargs):
-#     context = super(HomeListView, self).get_context_data(**kwargs)
-#     return context
 
-    
+def allInfoDisplay(request):
+    add = request.POST.get("address")
+    cit = request.POST.get("city")
+    zip = request.POST.get("zip")
+    hometype = request.POST.get("hometype")
+    pri = request.POST.get("price")
+    dep = request.POST.get("deposit")
+    roo = request.POST.get("rooms")
+    gen = request.POST.get("gender")
+    beds = request.POST.get("beds")
+    size = request.POST.get("size")
+    bath = request.POST.get("bath")
+    renetc = request.POST.get("rent_etc")
+    park = request.POST.get("parking")
+    inter = request.POST.get("internet")
+    pet = request.POST.get("pets")
+    ac = request.POST.get("ac")
+    heat = request.POST.get("heat")
+    lau = request.POST.get("laundry")
+    tv = request.POST.get("tv")
+    ammetc = request.POST.get("etc")
+    image = request.POST.get("file")
+    allinformation(address = add, city = cit, zip = zip,hometype = hometype, beds = beds, size = size, bath = bath,monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc, parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc).save()
+    # addressinformation = (address = add, city = cit, zip = zip).save()
+    # Shome = (hometype = hometype, price = pri, addy = add, beds = beds, size = size, bath = bath).save()
+    # rentinformation = (monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc).save()
+    # amenityinfo = (parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc,).save()
+    return render(request, "hello/home.html", )
 
-    '''
-    Shome(1, "apartment", 800, '100 golden oak ave', 600 , 3, 1).save()
-    Shome(2, "house", 1270, '2238 jefferson ave', 800 , 4, 2).save()
-    Shome(3, "apartment", 745, '600 prytania st', 745 , 3, 1).save()
-    Shome(4, "house", 1200, '2330 state st', 1200 , 5, 3).save()
-    Shome(5, "apartment", 750, '420 pine st', 750 , 1, 1).save()
-    Shome(6, "house", 900, '657 magazine st', 900 , 2, 1).save()
-    '''
 
 def profile(request):
     return render(request, "hello/profile.html")
@@ -54,48 +70,54 @@ def create_acc(request):
 
 def login_home(request):
     return render(request, "hello/login_home.html")
-    
-def listing(request):
-    ammenities_list = amenityinfo.objects.last()
-    rent_list = rentinformation.objects.last()
-    addyinfo = addressinformation.objects.last()
-    return render(request, "hello/listing.html", {'ammenities_list': ammenities_list,  'rent_list': rent_list, "addyinfo": addyinfo})
 
-def edit_listing(request):
-    rentinfo = rentinformation.objects.last() #goes to rentinformation class in models.py, gets objects from there
-    amenities = amenityinfo.objects.last()
-    addyinfo = addressinformation.objects.last()
-    return render(request, 'hello/edit_listing.html', {'rentinfo': rentinfo, 'amenities': amenities, 'addyinfo': addyinfo})
+
+
+def listing(request):
+    allInfoDisplay = allInfoDisplay.objects.last()
+        
+    return render(request, "hello/listing.html", {'allInfoDisplay': allInfoDisplay,})
+
+# def edit_listing(request):
+#     # rentinfo = rentinformation.objects.last() #goes to rentinformation class in models.py, gets objects from there
+#     # amenities = amenityinfo.objects.last()
+#     # addyinfo = addressinformation.objects.last()
+#     return render(request, 'hello/edit_listing.html', {'rentinfo': rentinfo, 'amenities': amenities, 'addyinfo': addyinfo})
 
 def test(request):
-    ammenities_list = amenityinfo.objects.last()
-    rent_list = rentinformation.objects.last()
-    return render(request, "hello/test.html", {'ammenities_list': ammenities_list,  'rent_list': rent_list})
+    allInfoDisplay = allInfoDisplay.objects.last()
+        
+    return render(request, "hello/listing.html", {'allInfoDisplay': allInfoDisplay,})
 
-def display(request):
-    print('test')
-    add = request.POST.get("address")
-    cit = request.POST.get("city")
-    zip = request.POST.get("zip")
-    pri = request.POST.get("price")
-    dep = request.POST.get("deposit")
-    roo = request.POST.get("rooms")
-    gen = request.POST.get("gender")
-    renetc = request.POST.get("rent_etc")
-    park = request.POST.get("parking")
-    inter = request.POST.get("internet")
-    pet = request.POST.get("pets")
-    ac = request.POST.get("ac")
-    heat = request.POST.get("heat")
-    lau = request.POST.get("laundry")
-    tv = request.POST.get("tv")
-    ammetc = request.POST.get("etc")
-    message = add, cit, zip, pri, dep, roo, gen, renetc, park, inter, pet, ac, heat, lau, ammetc
-    addressinformation(address = add, city = cit, zip = zip).save()
-    rentinformation(monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc).save()
-    amenityinfo(parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc,).save()
-    return render(request, "hello/test.html")
+
+
+
+# def display(request):
+#     print('test')
+#     add = request.POST.get("address")
+#     cit = request.POST.get("city")
+#     zip = request.POST.get("zip")
+#     pri = request.POST.get("price")
+#     dep = request.POST.get("deposit")
+#     roo = request.POST.get("rooms")
+#     gen = request.POST.get("gender")
+#     renetc = request.POST.get("rent_etc")
+#     park = request.POST.get("parking")
+#     inter = request.POST.get("internet")
+#     pet = request.POST.get("pets")
+#     ac = request.POST.get("ac")
+#     heat = request.POST.get("heat")
+#     lau = request.POST.get("laundry")
+#     tv = request.POST.get("tv")
+#     ammetc = request.POST.get("etc")
+#     message = add, cit, zip, pri, dep, roo, gen, renetc, park, inter, pet, ac, heat, lau, ammetc
+#     # addressinformation(address = add, city = cit, zip = zip).save()
+#     # rentinformation(monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc).save()
+#     # amenityinfo(parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc,).save()
+#     return render(request, "hello/test.html")
     
+
+
 
 def hello_there(request, name):
     return render(

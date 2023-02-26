@@ -71,7 +71,7 @@ class allinformation(models.Model):
     #need to upate forms to account for hometype, size, beds, bath
     
    
-
+'''
 class addressinformation(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
     address = models.CharField(max_length=200, blank=True, null=True)
@@ -96,6 +96,7 @@ class amenityinfo(models.Model):
     laundry = models.CharField(max_length=20, blank=True, null=True)
     streamingservices = models.CharField(max_length=4, blank=True, null=True)
     addamenityinfo = models.CharField(max_length=300, blank=True, null=True)
+'''
 
 class userinfo(models.Model):
     email = models.CharField(max_length=30, blank=True, null=True)
