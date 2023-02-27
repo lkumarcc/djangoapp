@@ -83,7 +83,7 @@ def edit_listing(request):
 
 
 def test(request):
-    allInfoDisplay = allInfoDisplay.objects.last()
+    allInfoDisplay = allinformation.objects.last()
         
     return render(request, "hello/listing.html", {'allInfoDisplay': allInfoDisplay,})
 
