@@ -43,7 +43,7 @@ def allInfoDisplay(request):
     tv = request.POST.get("tv")
     ammetc = request.POST.get("etc")
     image = request.POST.get("img")
-    allinformation(user = user, address = add, city = cit, zip = zip,hometype = hometype, beds = beds, size = size, bath = bath,monthlyprice = pri, securitydeposit = dep, numbertenants = roo, gender = gen, addrentinfo = renetc, parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc, image = image).save()
+    allinformation(user = user, address = add, city = cit, zip = zip,hometype = hometype, beds = beds, size = size, bath = bath, monthlyprice = pri, securitydeposit = dep, numbertenants = roo, gender = gen, addrentinfo = renetc, parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc, image = image).save()
     return render(request, "hello/home.html", )
 
 

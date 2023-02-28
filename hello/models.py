@@ -63,7 +63,7 @@ class allinformation(models.Model):
     laundry = models.CharField(max_length=20, blank=True, null=True)
     streamingservices = models.CharField(max_length=4, blank=True, null=True)
     addamenityinfo = models.CharField(max_length=300, blank=True, null=True)
-    images = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100,blank=True, null=True )
+    image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100,blank=True, null=True )
     #need to upate forms to account for hometype, size, beds, bath
     
    
@@ -103,6 +103,8 @@ class userinfo(models.Model):
     username = models.CharField(max_length=12, blank=True, null=True)
     password = models.CharField(max_length=12, blank=True, null=True)
     # models.IntegerField(blank=True, null=True)
+    
+
 class Shome(models.Model):
     hometype = models.CharField(max_length=100, blank=True, null=True)
     price = models.IntegerField( blank=True, null=True)
