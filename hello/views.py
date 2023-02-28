@@ -48,7 +48,8 @@ def allInfoDisplay(request):
 
 
 def profile(request):
-    return render(request, "hello/profile.html")
+    addyinfo = allinformation.objects.filter(user=request.user).last()
+    return render(request, "hello/profile.html", {'addyinfo': addyinfo,})
 
 def messages(request):
     return render(request, "hello/messages.html")
