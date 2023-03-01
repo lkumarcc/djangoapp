@@ -21,7 +21,6 @@ def home(request):
 
 
 def allInfoDisplay(request):
-    user = request.user
     add = request.POST.get("address")
     cit = request.POST.get("city")
     zip = request.POST.get("zip")
@@ -42,14 +41,14 @@ def allInfoDisplay(request):
     lau = request.POST.get("laundry")
     tv = request.POST.get("tv")
     ammetc = request.POST.get("etc")
-    image = request.POST.get("img")
-    allinformation(user = user, address = add, city = cit, zip = zip,hometype = hometype, beds = beds, size = size, bath = bath, monthlyprice = pri, securitydeposit = dep, numbertenants = roo, gender = gen, addrentinfo = renetc, parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc, image = image).save()
+    image = request.POST.get("file")
+    user = request.user
+    allinformation(user = user, address = add, city = cit, zip = zip,hometype = hometype, beds = beds, size = size, bath = bath,monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc, parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc).save()
     return render(request, "hello/home.html", )
 
 
 def profile(request):
-    addyinfo = allinformation.objects.filter(user=request.user).last()
-    return render(request, "hello/profile.html", {'addyinfo': addyinfo,})
+    return render(request, "hello/profile.html")
 
 def messages(request):
     return render(request, "hello/messages.html")
@@ -157,9 +156,12 @@ def userdisplay(request):
             phone = request.POST.get("phone")
             gen = request.POST.get("gender")
             # userinfo(firstname = first, lastname = last, username = uname, password = passw, email = email, phone = phone, gender = gen).save()
-            # user = User.objects.create_user(uname, email, passw)
+            new_user = User.objects.create_user(uname, email, passw)
             new_user = form.save(commit=False)
+            new_user.first_name = first
+            new_user.last_name = last
             new_user.save()
+            print(new_user)
             return render(request, "hello/login_home.html")
         else:
             return render(request, "hello/test.html")
