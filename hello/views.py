@@ -71,14 +71,17 @@ def login_home(request):
 
 
 def search_listings(request):
-    return render(request, "home/search_listings.html",)
+    if request.method == "POST":
+        search = request.POST.get("search")
+        return render(request, "hello/search_listings.html",{'search': search,})
+    
+    else:
+        return render(request, "hello/search_listings.html",{})
 
 
 
 def listing(request):
-    
     addyinfo = allinformation.objects.filter(user=request.user).last()
-        
     return render(request, "hello/listing.html", {'addyinfo': addyinfo,})
 
 def edit_listing(request):
