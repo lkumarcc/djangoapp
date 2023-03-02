@@ -70,6 +70,11 @@ def login_home(request):
 
 
 
+def search_listings(request):
+    return render(request, "home/search_listings.html",)
+
+
+
 def listing(request):
     
     addyinfo = allinformation.objects.filter(user=request.user).last()

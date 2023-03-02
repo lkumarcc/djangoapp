@@ -29,10 +29,15 @@ urlpatterns = [
     path("userdisplay/", views.userdisplay, name="userdisplay"),
     path("authenticateuser/", views.authenticateuser, name="authenticateuser"), 
     path("allInfoDisplay/", views.allInfoDisplay, name="allInfoDisplay"), 
+    path("authenticateuser/", views.authenticateuser, name="authenticateuser"), 
+    path("search_listings/", views.search_listings, name="search_listings"), 
     # path("all-ammenities/", views.all_ammenities, name="all_amenities")
 
     
     
 ]
 
+
 urlpatterns += staticfiles_urlpatterns()
+
+
