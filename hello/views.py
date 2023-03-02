@@ -73,7 +73,8 @@ def login_home(request):
 def search_listings(request):
     if request.method == "POST":
         search = request.POST.get("search")
-        return render(request, "hello/search_listings.html",{'search': search,})
+        search1 = allinformation.objects.filter(address__contains=search)
+        return render(request, "hello/search_listings.html",{'search1': search1,})
     
     else:
         return render(request, "hello/search_listings.html",{})
