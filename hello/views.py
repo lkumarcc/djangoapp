@@ -8,7 +8,7 @@ from hello.models import LogMessage
 from django.views.generic import ListView
 from .models import Profile, addListings, userinfo, Shome, allinformation
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
@@ -45,7 +45,6 @@ def allInfoDisplay(request):
     user = request.user
     allinformation(user = user, address = add, city = cit, zip = zip,hometype = hometype, beds = beds, size = size, bath = bath,monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc, parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc).save()
     return render(request, "hello/home.html", )
-
 
 def profile(request):
     return render(request, "hello/profile.html")
@@ -85,11 +84,18 @@ def listing(request):
     addyinfo = allinformation.objects.filter(user=request.user).last()
     return render(request, "hello/listing.html", {'addyinfo': addyinfo,})
 
+def view_listing(request, listing_id):
+    addyinfo = allinformation.objects.filter(id=listing_id).last()
+    print("Listing ID:", listing_id)
+    return render(request, "hello/view_listing.html", {'addyinfo': addyinfo,})
+
 def edit_listing(request):
-    addyinfo = allinformation.objects.last()
-        
+    addyinfo = allinformation.objects.filter(user=request.user).last()
     return render(request, "hello/edit_listing.html", {'addyinfo': addyinfo,})
 
+def deletelisting(request):
+    allinformation.objects.filter(user=request.user).delete()
+    return render(request, 'hello/home.html')
 
 def test(request):
     allInfoDisplay = allinformation.objects.last()
@@ -193,9 +199,16 @@ def authenticateuser(request):
     user = authenticate(username=checkusername, password=checkpassword)
     if user is not None:
        login(request, user) 
-       return render(request, "hello/home.html")
+       shome_list = allinformation.objects.all()
+       return render(request, "hello/home.html", {'shome_list': shome_list})
     else:
         return render(request, "hello/create_acc.html")
+
+def logoutuser(request):
+    if request.method == "POST":
+        logout(request)
+
+        return redirect('/login_home')
 
 
 # if userinfo.objects.filter(email=checkemail).exists():

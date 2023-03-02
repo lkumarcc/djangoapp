@@ -23,13 +23,16 @@ urlpatterns = [
     path("listing", views.listing, name="listing"),
     path("add_listing/", views.add_listing, name="add_listing"),
     path("edit_listing/", views.edit_listing, name="edit_listing"),
+    path("view_listing/<int:listing_id>", views.view_listing, name="view_listing"),
     path("test/", views.test, name="test"),
     path("create_acc/", views.create_acc, name="create_acc"),
     path("login_home/", views.login_home, name="login_home"), 
     path("userdisplay/", views.userdisplay, name="userdisplay"),
     path("authenticateuser/", views.authenticateuser, name="authenticateuser"), 
     path("allInfoDisplay/", views.allInfoDisplay, name="allInfoDisplay"), 
+    path("deletelisting/", views.deletelisting, name="deletelisting"), 
     path("authenticateuser/", views.authenticateuser, name="authenticateuser"), 
+    path("logoutuser/", views.logoutuser, name="logoutuser"), 
     path("search_listings/", views.search_listings, name="search_listings"), 
     # path("all-ammenities/", views.all_ammenities, name="all_amenities")
 

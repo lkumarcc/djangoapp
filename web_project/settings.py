@@ -145,3 +145,6 @@ LOGGING = {
         'level': 'WARNING',
     },
 }
+
+LOGIN_REDIRECT_URL = "/home"
+LOGOUT_REDIRECT_URL = "/login_home" 

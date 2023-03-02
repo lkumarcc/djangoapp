@@ -67,7 +67,6 @@
     </div>
     <!--Nav Bar Ends-->
  
-    <!-- UPDATE THIS TO LOAD IN LISTING'S INFO-->
     <div class="container-fluid bg-white p-0">
         <div class="row g-0 flex-column-reverse flex-md-row">
             <div class="row col p-5 mt-2" style="margin-left:70px">
@@ -97,10 +96,14 @@
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-misc.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="etc">Additional Amenities: </label><br><textarea name="etc" rows="10" cols="50" placeholder="Backyard pool, large front porch, fireplace in living room, etc.">{{addyinfo.addamenityinfo}}</textarea></p>
            
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-houseimages.png'%}" alt="Icon" style="width: 30px; height: 30px;"><label for="file">House Image Upload:</label><input type="file" id="img" name="img" style="margin-left:5px" accept="image/*" multiple></p>
-                    
-                    <input type="submit" value="Submit Changes">
-                </form>
-
+                    <div>
+                        <input type="submit" value="Submit Changes">
+                    </form>  
+                    <form action = "/deletelisting/" method = "post">
+                        {% csrf_token %}
+                        <input class="btn btn-danger mt-4" type="submit" value="Delete Listing" onclick="return confirm('Are you sure?')"/>   
+                    </form>                  
+                    </div>
                 
             </div>
         </div>
