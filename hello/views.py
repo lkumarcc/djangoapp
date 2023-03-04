@@ -24,26 +24,27 @@ def allInfoDisplay(request):
     add = request.POST.get("address")
     cit = request.POST.get("city")
     zip = request.POST.get("zip")
+    state = request.POST.get("state")
     hometype = request.POST.get("hometype")
     pri = request.POST.get("price")
     dep = request.POST.get("deposit")
     roo = request.POST.get("rooms")
     gen = request.POST.get("gender")
     beds = request.POST.get("beds")
-    size = request.POST.get("size")
-    bath = request.POST.get("bath")
+    #size = request.POST.get("size")
+    #bath = request.POST.get("bath")
     renetc = request.POST.get("rent_etc")
     park = request.POST.get("parking")
-    inter = request.POST.get("internet")
+    #inter = request.POST.get("internet")
     pet = request.POST.get("pets")
-    ac = request.POST.get("ac")
-    heat = request.POST.get("heat")
+    #ac = request.POST.get("ac")
+    #heat = request.POST.get("heat")
     lau = request.POST.get("laundry")
-    tv = request.POST.get("tv")
+    #tv = request.POST.get("tv")
     ammetc = request.POST.get("etc")
     image = request.POST.get("file")
     user = request.user
-    allinformation(user = user, address = add, city = cit, zip = zip,hometype = hometype, beds = beds, size = size, bath = bath,monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc, parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc).save()
+    allinformation(user = user, address = add, city = cit, zip = zip, state = state, hometype = hometype, beds = beds, monthlyprice = pri, securitydeposit = dep, numbertenants = roo, gender = gen, addrentinfo = renetc, parking = park, pets = pet, laundry = lau, addamenityinfo = ammetc).save()
     return render(request, "hello/home.html", )
 
 def profile(request):
@@ -81,7 +82,8 @@ def search_listings(request):
 
 
 def listing(request):
-    addyinfo = allinformation.objects.filter(user=request.user).last()
+    #addyinfo = allinformation.objects.filter(user=request.user).last()
+    addyinfo = allinformation.objects.first()
     return render(request, "hello/listing.html", {'addyinfo': addyinfo,})
 
 def view_listing(request, listing_id):
@@ -90,7 +92,8 @@ def view_listing(request, listing_id):
     return render(request, "hello/view_listing.html", {'addyinfo': addyinfo,})
 
 def edit_listing(request):
-    addyinfo = allinformation.objects.filter(user=request.user).last()
+    #addyinfo = allinformation.objects.filter(user=request.user).last()
+    addyinfo = allinformation.objects.first()
     return render(request, "hello/edit_listing.html", {'addyinfo': addyinfo,})
 
 def deletelisting(request):
