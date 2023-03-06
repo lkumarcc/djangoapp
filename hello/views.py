@@ -48,7 +48,8 @@ def allInfoDisplay(request):
     return render(request, "hello/home.html", )
 
 def profile(request):
-    return render(request, "hello/profile.html")
+    addyinfo = allinformation.objects.filter(user=request.user).last()
+    return render(request, "hello/profile.html", {'addyinfo': addyinfo,} )
 
 def messages(request):
     return render(request, "hello/messages.html")
@@ -145,7 +146,6 @@ def userdisplay(request):
             email = request.POST.get("email")
             phone = request.POST.get("phone")
             gen = request.POST.get("gender")
-            # userinfo(firstname = first, lastname = last, username = uname, password = passw, email = email, phone = phone, gender = gen).save()
             new_user = User.objects.create_user(uname, email, passw, first_name = first, last_name = last)
             new_user = form.save(commit=False)
             # new_user.first_name = first
