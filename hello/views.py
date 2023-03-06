@@ -146,10 +146,10 @@ def userdisplay(request):
             phone = request.POST.get("phone")
             gen = request.POST.get("gender")
             # userinfo(firstname = first, lastname = last, username = uname, password = passw, email = email, phone = phone, gender = gen).save()
-            new_user = User.objects.create_user(uname, email, passw)
+            new_user = User.objects.create_user(uname, email, passw, first_name = first, last_name = last)
             new_user = form.save(commit=False)
-            new_user.first_name = first
-            new_user.last_name = last
+            # new_user.first_name = first
+            # new_user.last_name = last
             new_user.save()
             print(new_user)
             return render(request, "hello/login_home.html")
