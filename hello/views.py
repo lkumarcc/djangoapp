@@ -82,8 +82,8 @@ def search_listings(request):
 
 
 def listing(request):
-    #addyinfo = allinformation.objects.filter(user=request.user).last()
-    addyinfo = allinformation.objects.first()
+    addyinfo = allinformation.objects.filter(user=request.user).last()
+    # addyinfo = allinformation.objects.first()
     return render(request, "hello/listing.html", {'addyinfo': addyinfo,})
 
 def view_listing(request, listing_id):
@@ -92,8 +92,8 @@ def view_listing(request, listing_id):
     return render(request, "hello/view_listing.html", {'addyinfo': addyinfo,})
 
 def edit_listing(request):
-    #addyinfo = allinformation.objects.filter(user=request.user).last()
-    addyinfo = allinformation.objects.first()
+    addyinfo = allinformation.objects.filter(user=request.user).last()
+    # addyinfo = allinformation.objects.first()
     return render(request, "hello/edit_listing.html", {'addyinfo': addyinfo,})
 
 def deletelisting(request):
@@ -104,34 +104,6 @@ def test(request):
     allInfoDisplay = allinformation.objects.last()
         
     return render(request, "hello/listing.html", {'allInfoDisplay': allInfoDisplay,})
-
-
-
-
-# def display(request):
-#     print('test')
-#     add = request.POST.get("address")
-#     cit = request.POST.get("city")
-#     zip = request.POST.get("zip")
-#     pri = request.POST.get("price")
-#     dep = request.POST.get("deposit")
-#     roo = request.POST.get("rooms")
-#     gen = request.POST.get("gender")
-#     renetc = request.POST.get("rent_etc")
-#     park = request.POST.get("parking")
-#     inter = request.POST.get("internet")
-#     pet = request.POST.get("pets")
-#     ac = request.POST.get("ac")
-#     heat = request.POST.get("heat")
-#     lau = request.POST.get("laundry")
-#     tv = request.POST.get("tv")
-#     ammetc = request.POST.get("etc")
-#     message = add, cit, zip, pri, dep, roo, gen, renetc, park, inter, pet, ac, heat, lau, ammetc
-#     # addressinformation(address = add, city = cit, zip = zip).save()
-#     # rentinformation(monthlyprice = pri, securitydeposit = dep, numbertenants = roo, addrentinfo = renetc).save()
-#     # amenityinfo(parking = park, internet = inter, pets = pet, aircond = ac, heating = heat, laundry = lau, streamingservices = tv, addamenityinfo = ammetc,).save()
-#     return render(request, "hello/test.html")
-    
 
 
 
