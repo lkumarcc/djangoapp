@@ -80,11 +80,15 @@ def login_home(request):
     return render(request, "hello/login_home.html")
 
 
-
 def search_listings(request):
     if request.method == "POST":
         search = request.POST.get("search")
-        search1 = allinformation.objects.filter(address__contains=search)
+        minPrice = request.POST.get("minPrice")
+        maxPrice = request.POST.get("maxPrice")
+        
+       #pFilter = allinformation.objects.all().filter(monthlyprice__range=(minPrice, maxPrice))                                        
+        search1 = allinformation.objects.all().filter(monthlyprice__range=(minPrice, maxPrice),     address__contains=search)
+        #print("test")
         return render(request, "hello/search_listings.html",{'search1': search1,})
     
     else:

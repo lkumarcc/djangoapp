@@ -73,12 +73,17 @@
 
 
                                <!-- <input type="search" class="form-control border-0 py-3" placeholder="Search Keyword"> -->
->
-                                <form  action = "{% url 'search_listings' %} " method = "POST">
-                                    {% csrf_token %} 
-                                    <input type = "text" name = "search">
-                                    <button type = "submit" > Search</button>
-                                </form>
+                                    <form  action = "{% url 'search_listings' %} " method = "POST">
+                                        {% csrf_token %} 
+                                        <input type = "text" name = "search" placeholder="Search Keyword">
+                                        <p><label for="minPrice"></label><input type="number" id="minPrice" name="minPrice" placeholder="Minimum Price" min=0 style="margin-bottom:10px; margin-left:5px" required></p>
+                                        <p><label for="maxPrice"></label><input type="number" id="maxPrice" name="maxPrice" placeholder="Maximum Price" min=0 style="margin-bottom:10px; margin-left:5px" required></p>
+                                        
+                                        <!-- -->
+                                    
+
+                                        <button type = "submit" > Search</button>
+                                    </form>
 
 
                             </div>
