@@ -76,8 +76,8 @@
                 <h1 class="display-5 animated fadeIn mb-4">{{addyinfo.address}}, <span class="text-primary">{{addyinfo.city}}, {{addyinfo.state}}</span> {{addyinfo.zip}}</h1>
                 <!-- Description -->
                 <p class="animated fadeIn mb-4 pb-2">{{addyinfo.addrentinfo}} </p>
-                <p><img class="img-fluid" src="{% static 'hello/images/icon-tenants.png'%}" alt="Icon" style="width: 35px; height: 35px;">Total Number of Tenants: {{addyinfo.numbertenants}}</p>
-                <p><img class="img-fluid" src="{% static 'hello/images/icon-bed.png'%}" alt="Icon" style="width: 23px; height: 23px;">Bedrooms Available: {{addyinfo.beds}}</p>
+                <p><img class="img-fluid" src="{% static 'hello/images/icon-tenants.png'%}" alt="Icon" style="width: 30px; height: 30px;">Total Number of Tenants: {{addyinfo.numbertenants}}</p>
+                <p><img class="img-fluid" src="{% static 'hello/images/icon-bed.png'%}" alt="Icon" style="width: 30px; height: 30px;">Bedrooms Available: {{addyinfo.beds}}</p>
                 <p class="btn btn-primary py-1 px-3 me-1 animated fadeIn">                        
                     <img class="img-fluid" src="{% static 'hello/images/icon-dollar.png'%}" alt="Icon" style="width: 50px; height: 50px;">
                     <!--Rent-->
@@ -126,7 +126,7 @@
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <!-- User indicates yes/no on form for pre filled fields -->
                     <h1 class="mb-4">Amenities</h1>
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-house (2).png'%}" alt="Icon" style="width: 25px; height: 25px;">Home Type: {{addyinfo.hometype}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-house (2).png'%}" alt="Icon" style="width: 30px; height: 30px;">Home Type: {{addyinfo.hometype}}</p>
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-person.png'%}" alt="Icon" style="width: 30px; height: 30px;"> Gender (Fluid/Female-Only/Male-Only): {{addyinfo.gender}}</p>
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-parking.png'%}" alt="Icon" style="width: 30px; height: 30px;">Parking: {{addyinfo.parking}}</p>
                     <!--<p><img class="img-fluid" src="{% static 'hello/images/icon-wifi.png'%}" alt="Icon" style="width: 30px; height: 30px;">Internet: {{addyinfo.internet}}</p>-->
@@ -138,10 +138,15 @@
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-misc.png'%}" alt="Icon" style="width: 30px; height: 30px;">Additional Amenities: {{addyinfo.addamenityinfo}}</p>
                     <!-- Security Deposit-->
                     <p class="mb-4">Security Deposit: {{addyinfo.securitydeposit}}</p>
-                    <button class="btn btn-primary py-1 px-3 me-1 animated fadeIn">                        
-                        <img class="img-fluid" src="{% static 'hello/images/icon-favorite.png'%}" alt="Icon" style="width: 60px; height: 60px;">
-                        Favorite
-                    </button>
+
+                    <form action = "/addFavorites/" method = "post">
+                        {% csrf_token %}
+                        <button class="btn btn-primary py-1 px-3 me-1 animated fadeIn" type="submit" name = "favorite" value={{addyinfo.id}}>                        
+                            <img class="img-fluid" src="{% static 'hello/images/icon-favorite.png'%}" alt="Icon" style="width: 60px; height: 60px;">
+                            Favorite
+                        </button>
+                    </form>
+                    
                     <!--Property Availability -->
                     <a href="" class="btn btn-dark py-3 px-4"><i class="fa fa-calendar-alt me-2"></i>Availability</a>
                 </div>

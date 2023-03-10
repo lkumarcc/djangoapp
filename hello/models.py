@@ -116,4 +116,8 @@ class Shome(models.Model):
     beds = models.IntegerField( blank=True, null=True)
     bath = models.DecimalField(max_digits = 100, decimal_places=1, blank=True, null=True)
     
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    listing =  models.ForeignKey(allinformation, on_delete=models.CASCADE)
+    
 #test 
