@@ -70,8 +70,20 @@
                     <div class="col-md-10">
                         <div class="row g-2">
                             <div class="col-md-4">
-                                <input type="search" class="form-control border-0 py-3" placeholder="Search Keyword">
+
+
+                               <!-- <input type="search" class="form-control border-0 py-3" placeholder="Search Keyword"> -->
+>
+                                <form  action = "{% url 'search_listings' %} " method = "POST">
+                                    {% csrf_token %} 
+                                    <input type = "text" name = "search">
+                                    <button type = "submit" > Search</button>
+                                </form>
+
+
                             </div>
+
+                            <!--
                             <div class="col-md-4">
                                 <select class="form-select border-0 py-3">
                                     <option selected>Price</option>
@@ -89,6 +101,7 @@
                                     <option value="3">4+</option>
                                 </select>
                             </div>
+                            -->
                         </div>
                     </div>
                     <div class="col-md-2">
