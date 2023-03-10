@@ -9,6 +9,7 @@ from django.views.generic import ListView
 from .models import Profile, addListings, userinfo, Shome, allinformation, Favorite
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from decimal import Decimal
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
@@ -85,9 +86,20 @@ def search_listings(request):
         search = request.POST.get("search")
         minPrice = request.POST.get("minPrice")
         maxPrice = request.POST.get("maxPrice")
+
         
-       #pFilter = allinformation.objects.all().filter(monthlyprice__range=(minPrice, maxPrice))                                        
-        search1 = allinformation.objects.all().filter(monthlyprice__range=(minPrice, maxPrice),     address__contains=search)
+
+        if search == None:
+            search == allinformation.objects.address()
+              
+        if minPrice == "":
+            minPrice = 0
+        if maxPrice == '':
+            maxPrice = 10000
+        
+    
+                              
+        search1 = allinformation.objects.all().filter(address__contains=search, monthlyprice__range=(minPrice, maxPrice) )
         #print("test")
         return render(request, "hello/search_listings.html",{'search1': search1,})
     
