@@ -226,13 +226,18 @@ def addFavorites(request):
         if listing is not None:
             user = request.user
             Favorite(user = user, listing = listing).save()
-            print(Favorite.objects.all())
-            print("worked")
-            return render(request, "hello/favorites.html")
+            listingid = list(Favorite.objects.filter(user=request.user).values("listing_id"))
+            listingnums = []
+    
+            for item in listingid:
+                listingnums.append(item["listing_id"])
+
+            favorite_listings = allinformation.objects.filter(pk__in=listingnums)
+            return render(request, "hello/favorites.html", {'favorite_listings': favorite_listings})
         else:
-            return render(request, "hello/test.html")
+            return render(request, "/")
     else:
-        return render(request, "hello/test.html")
+        return render(request, "/")
             
             
         
