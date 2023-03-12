@@ -78,13 +78,14 @@
                     {{form.as_p}}
                     <input class="btn-lg btn-primary ms-1 text-white"   type="submit">
                 </form>
-                {% endif %}
-            
 
+                {% endif %}
+              
             
-            <form action = "/deletelisting/" method = "post">
+            
+            <form action = "" method = "post">
                 {% csrf_token %}
-                <input class="btn btn-danger mt-4" type="submit" value="Delete Listing" onclick="return confirm('Are you sure you would like to delete this listing?')"/>   
+                <input name="delete_listing" class="btn btn-danger mt-4" type="submit" value="Delete Listing" onclick="return confirm('Are you sure you would like to delete this listing?')"/>   
             </form>                  
 
         </div>

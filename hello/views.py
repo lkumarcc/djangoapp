@@ -1,6 +1,5 @@
 import re
 from django.utils.timezone import datetime
-from django.http import HttpResponse, QueryDict
 from django.shortcuts import render
 from django.shortcuts import redirect
 from hello.forms import LogMessageForm, CreateUserForm
@@ -11,7 +10,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .forms import AddListingForm
 from django.http import HttpResponseRedirect
-from decimal import Decimal
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
@@ -20,7 +18,6 @@ class HomeListView(ListView):
 
 def home(request):
     shome_list = allinformation.objects.all()
-    print((shome_list))
     return render(request, 'hello/home.html', {'shome_list': shome_list})
 
 def profile(request):
@@ -111,16 +108,22 @@ def view_listing(request, listing_id):
 def edit_listing(request, pk):
     submitted = False
     listing_object = allinformation.objects.get(id=pk)
-    print(listing_object)
     form = AddListingForm(instance=listing_object)
     
     if request.method =='POST':
-        form = AddListingForm(data =request.POST, files = request.FILES, instance=listing_object)
-        if form.is_valid():
-            listing = form.save(commit=False)
-            listing.user = request.user
-            listing.save()
-            return HttpResponseRedirect('/edit_listing/' +pk+'/?submitted=True')
+        if 'delete_listing' in request.POST: #handle deleting listing button on edit page 
+                listing = allinformation.objects.get(id=pk).delete()
+                print("Deleting Listing:", listing)
+                shome_list = allinformation.objects.all()
+                messages= ['Your listing has been deleted successfully.']
+                return render(request, 'hello/home.html', {'shome_list': shome_list, 'messages': messages})
+        else:
+            form = AddListingForm(data =request.POST, files = request.FILES, instance=listing_object)
+            if form.is_valid():
+                listing = form.save(commit=False)
+                listing.user = request.user
+                listing.save()
+                return HttpResponseRedirect('/edit_listing/' +pk+'/?submitted=True')
         
     else:
         form = AddListingForm(instance=listing_object)
@@ -129,9 +132,6 @@ def edit_listing(request, pk):
 
     return render(request, 'hello/edit_listing.html', {'form': form, 'submitted': submitted})
 
-def deletelisting(request):
-    allinformation.objects.filter(user=request.user).delete()
-    return render(request, 'hello/home.html')
 
 def test(request):
     allInfoDisplay = allinformation.objects.all()

@@ -29,7 +29,6 @@ urlpatterns = [
     path("login_home/", views.login_home, name="login_home"), 
     path("userdisplay/", views.userdisplay, name="userdisplay"),
     path("authenticateuser/", views.authenticateuser, name="authenticateuser"),  
-    path("deletelisting/", views.deletelisting, name="deletelisting"), 
     path("authenticateuser/", views.authenticateuser, name="authenticateuser"), 
     path("logoutuser/", views.logoutuser, name="logoutuser"), 
     path("search_listings/", views.search_listings, name="search_listings"), 
