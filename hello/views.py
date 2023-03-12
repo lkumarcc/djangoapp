@@ -23,23 +23,6 @@ def home(request):
     print((shome_list))
     return render(request, 'hello/home.html', {'shome_list': shome_list})
 
-
-def add_listing(request):
-    submitted = False
-    if request.method =='POST':
-        form = AddListingForm(data =request.POST, files = request.FILES)
-        if form.is_valid():
-            listing = form.save(commit=False)
-            listing.user = request.user
-            listing.save()
-            return HttpResponseRedirect('/add_listing?submitted=True')
-        
-    else:
-        form = AddListingForm()
-        if 'submitted' in request.GET: 
-            submitted = True
-    return render(request, "hello/add_listing.html", {'form': form, 'submitted': submitted} )
-
 def profile(request):
     user_listings = allinformation.objects.filter(user=request.user)
     return render(request, "hello/profile.html", {'user_listings': user_listings,} )
@@ -98,19 +81,53 @@ def search_listings(request):
 
 def listing(request):
     addyinfo = allinformation.objects.filter(user=request.user).last()
+    if addyinfo==None: 
+        return add_listing(request)
+    
     # addyinfo = allinformation.objects.first()
     return render(request, "hello/listing.html", {'addyinfo': addyinfo,})
+
+def add_listing(request):
+    submitted = False
+    if request.method =='POST':
+        form = AddListingForm(data =request.POST, files = request.FILES)
+        if form.is_valid():
+            listing = form.save(commit=False)
+            listing.user = request.user
+            listing.save()
+            return HttpResponseRedirect('/add_listing?submitted=True')
+        
+    else:
+        form = AddListingForm()
+        if 'submitted' in request.GET: 
+            submitted = True
+    return render(request, "hello/add_listing.html", {'form': form, 'submitted': submitted} )
 
 def view_listing(request, listing_id):
     addyinfo = allinformation.objects.filter(id=listing_id).last()
     print("Listing ID:", listing_id)
     return render(request, "hello/view_listing.html", {'addyinfo': addyinfo,})
 
-def edit_listing(request):
-    addyinfo = allinformation.objects.filter(user=request.user).last()
-    # addyinfo = allinformation.objects.first()
+def edit_listing(request, pk):
+    submitted = False
+    listing_object = allinformation.objects.get(id=pk)
+    print(listing_object)
+    form = AddListingForm(instance=listing_object)
+    
+    if request.method =='POST':
+        form = AddListingForm(data =request.POST, files = request.FILES, instance=listing_object)
+        if form.is_valid():
+            listing = form.save(commit=False)
+            listing.user = request.user
+            listing.save()
+            return HttpResponseRedirect('/edit_listing/' +pk+'/?submitted=True')
+        
+    else:
+        form = AddListingForm(instance=listing_object)
+        if 'submitted' in request.GET: 
+            submitted = True
 
-    return render(request, "hello/edit_listing.html", {'addyinfo': addyinfo,})
+    return render(request, 'hello/edit_listing.html', {'form': form, 'submitted': submitted})
 
 def deletelisting(request):
     allinformation.objects.filter(user=request.user).delete()
