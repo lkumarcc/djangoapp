@@ -33,6 +33,7 @@ urlpatterns = [
     path("authenticateuser/", views.authenticateuser, name="authenticateuser"), 
     path("logoutuser/", views.logoutuser, name="logoutuser"), 
     path("search_listings/", views.search_listings, name="search_listings"), 
+    path("addFavorites/", views.addFavorites, name="addFavorites"), 
     # path("all-ammenities/", views.all_ammenities, name="all_amenities")
 
     

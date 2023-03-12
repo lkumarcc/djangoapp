@@ -1,16 +1,17 @@
 import re
 from django.utils.timezone import datetime
-from django.http import HttpResponse
+from django.http import HttpResponse, QueryDict
 from django.shortcuts import render
 from django.shortcuts import redirect
 from hello.forms import LogMessageForm, CreateUserForm
 from hello.models import LogMessage
 from django.views.generic import ListView
-from .models import Profile, addListings, userinfo, Shome, allinformation
+from .models import Profile, addListings, userinfo, Shome, allinformation, Favorite
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .forms import AddListingForm
 from django.http import HttpResponseRedirect
+from decimal import Decimal
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
@@ -19,6 +20,7 @@ class HomeListView(ListView):
 
 def home(request):
     shome_list = allinformation.objects.all()
+    print((shome_list))
     return render(request, 'hello/home.html', {'shome_list': shome_list})
 
 
@@ -46,7 +48,16 @@ def messages(request):
     return render(request, "hello/messages.html")
 
 def favorites(request):
-    return render(request, "hello/favorites.html")
+    listingid = list(Favorite.objects.filter(user=request.user).values("listing_id"))
+    print("test3")
+    print(listingid)
+    listingnums = []
+    
+    for item in listingid:
+        listingnums.append(item["listing_id"])
+
+    addyinfo = allinformation.objects.filter(pk__in=listingnums)
+    return render(request, "hello/favorites.html", {'addyinfo': addyinfo})
 
 def about(request):
     return render(request, "hello/about.html")
@@ -58,11 +69,26 @@ def login_home(request):
     return render(request, "hello/login_home.html")
 
 
-
 def search_listings(request):
     if request.method == "POST":
         search = request.POST.get("search")
-        search1 = allinformation.objects.filter(address__contains=search)
+        minPrice = request.POST.get("minPrice")
+        maxPrice = request.POST.get("maxPrice")
+
+        
+
+        if search == None:
+            search == allinformation.objects.address()
+              
+        if minPrice == "":
+            minPrice = 0
+        if maxPrice == '':
+            maxPrice = 10000
+        
+    
+                              
+        search1 = allinformation.objects.all().filter(address__contains=search, monthlyprice__range=(minPrice, maxPrice) )
+        #print("test")
         return render(request, "hello/search_listings.html",{'search1': search1,})
     
     else:
@@ -83,6 +109,7 @@ def view_listing(request, listing_id):
 def edit_listing(request):
     addyinfo = allinformation.objects.filter(user=request.user).last()
     # addyinfo = allinformation.objects.first()
+
     return render(request, "hello/edit_listing.html", {'addyinfo': addyinfo,})
 
 def deletelisting(request):
@@ -90,7 +117,8 @@ def deletelisting(request):
     return render(request, 'hello/home.html')
 
 def test(request):
-    allInfoDisplay = allinformation.objects.last()
+    allInfoDisplay = allinformation.objects.all()
+    print(allInfoDisplay)
         
     return render(request, "hello/listing.html", {'allInfoDisplay': allInfoDisplay,})
 
@@ -172,6 +200,25 @@ def logoutuser(request):
         logout(request)
 
         return redirect('/login_home')
+    
+def addFavorites(request):
+    if request.method == "POST":
+        listingid = request.POST.get("favorite")
+        listing = allinformation.objects.filter(id = listingid).first()
+        print(listing)
+        if listing is not None:
+            user = request.user
+            Favorite(user = user, listing = listing).save()
+            print(Favorite.objects.all())
+            print("worked")
+            return render(request, "hello/favorites.html")
+        else:
+            return render(request, "hello/test.html")
+    else:
+        return render(request, "hello/test.html")
+            
+            
+        
 
 
 # if userinfo.objects.filter(email=checkemail).exists():
