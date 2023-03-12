@@ -69,52 +69,28 @@
             <div class="row g-2">
                     <div class="col-md-10">
                         <div class="row g-2">
-                            <div class="col-md-4">
 
 
                                <!-- <input type="search" class="form-control border-0 py-3" placeholder="Search Keyword"> -->
                                     <form  action = "{% url 'search_listings' %} " method = "POST">
                                         {% csrf_token %} 
-                                        <input type = "text" name = "search" placeholder="Search Keyword">
-                                        <p><label for="minPrice"></label><input type="number" id="minPrice" name="minPrice" placeholder="Minimum Price" min=0 style="margin-bottom:10px; margin-left:5px" ></p>
-                                        <p><label for="maxPrice"></label><input type="number" id="maxPrice" name="maxPrice" placeholder="Maximum Price" min=0 style="margin-bottom:10px; margin-left:5px" ></p>
-                                        
-                                        <!-- -->
-                                    
-
-                                        <button type = "submit" > Search</button>
+                                        <div style="display:inline-block;">
+                                        <input type = "text" name = "search" placeholder="Search Keyword" class="form-control border-0 py-3">
+                                        </div>
+                                        <div style="display:inline-block;">
+                                        <label for="minPrice"></label><input type="number" id="minPrice" name="minPrice" placeholder="Minimum Price" min=0  class="form-control border-0 py-3">
+                                        </div>
+                                        <div style="display:inline-block;">
+                                        <label for="maxPrice"></label><input type="number" id="maxPrice" name="maxPrice" placeholder="Maximum Price" min=0 class="form-control border-0 py-3">
+                                        </div>
+                                        <div style="display:inline-block;" >
+                                        <button type = "submit" class="btn btn-dark border-0 w-100 py-3" > Search</button>
+                                        </div>
                                     </form>
 
 
-                            </div>
 
-                            <!--
-                            <div class="col-md-4">
-                                <select class="form-select border-0 py-3">
-                                    <option selected>Price</option>
-                                    <option value="1">$500-$800</option>
-                                    <option value="2">$800-$1200</option>
-                                    <option value="3">$1200 +</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <select class="form-select border-0 py-3">
-                                    <option selected>Number of Rooms Needed</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="3">4+</option>
-                                </select>
-                            </div>
-                            -->
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <!--Implement Funcitonality Here Based on Input Selection(s)-->
-
-                        <a class="btn btn-dark border-0 w-100 py-3" href="{% url 'search_listings' %}"> {% csrf_token %} <type = "search" aria-label ="search" name = "search"> Search</a>
-
-                        </p>
                     </div>
             </div>
         </div>

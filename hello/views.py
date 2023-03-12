@@ -56,8 +56,8 @@ def favorites(request):
     for item in listingid:
         listingnums.append(item["listing_id"])
 
-    addyinfo = allinformation.objects.filter(pk__in=listingnums)
-    return render(request, "hello/favorites.html", {'addyinfo': addyinfo})
+    favorite_listings = allinformation.objects.filter(pk__in=listingnums)
+    return render(request, "hello/favorites.html", {'favorite_listings': favorite_listings})
 
 def about(request):
     return render(request, "hello/about.html")
