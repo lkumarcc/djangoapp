@@ -9,6 +9,8 @@ from django.views.generic import ListView
 from .models import Profile, addListings, userinfo, Shome, allinformation
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from .forms import AddListingForm
+from django.http import HttpResponseRedirect
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
@@ -20,32 +22,21 @@ def home(request):
     return render(request, 'hello/home.html', {'shome_list': shome_list})
 
 
-def allInfoDisplay(request):
-    add = request.POST.get("address")
-    cit = request.POST.get("city")
-    zip = request.POST.get("zip")
-    state = request.POST.get("state")
-    hometype = request.POST.get("hometype")
-    pri = request.POST.get("price")
-    dep = request.POST.get("deposit")
-    roo = request.POST.get("rooms")
-    gen = request.POST.get("gender")
-    beds = request.POST.get("beds")
-    #size = request.POST.get("size")
-    #bath = request.POST.get("bath")
-    renetc = request.POST.get("rent_etc")
-    park = request.POST.get("parking")
-    #inter = request.POST.get("internet")
-    pet = request.POST.get("pets")
-    #ac = request.POST.get("ac")
-    #heat = request.POST.get("heat")
-    lau = request.POST.get("laundry")
-    #tv = request.POST.get("tv")
-    ammetc = request.POST.get("etc")
-    image = request.POST.get("file")
-    user = request.user
-    allinformation(user = user, address = add, city = cit, zip = zip, state = state, hometype = hometype, beds = beds, monthlyprice = pri, securitydeposit = dep, numbertenants = roo, gender = gen, addrentinfo = renetc, parking = park, pets = pet, laundry = lau, addamenityinfo = ammetc).save()
-    return render(request, "hello/home.html", )
+def add_listing(request):
+    submitted = False
+    if request.method =='POST':
+        form = AddListingForm(data =request.POST, files = request.FILES)
+        if form.is_valid():
+            listing = form.save(commit=False)
+            listing.user = request.user
+            listing.save()
+            return HttpResponseRedirect('/add_listing?submitted=True')
+        
+    else:
+        form = AddListingForm()
+        if 'submitted' in request.GET: 
+            submitted = True
+    return render(request, "hello/add_listing.html", {'form': form, 'submitted': submitted} )
 
 def profile(request):
     addyinfo = allinformation.objects.filter(user=request.user).last()
@@ -56,9 +47,6 @@ def messages(request):
 
 def favorites(request):
     return render(request, "hello/favorites.html")
-
-def add_listing(request):
-    return render(request, "hello/add_listing.html")
 
 def about(request):
     return render(request, "hello/about.html")

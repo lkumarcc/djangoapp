@@ -64,7 +64,7 @@ class allinformation(models.Model):
     laundry = models.CharField(max_length=20, blank=True, null=True)
     #streamingservices = models.CharField(max_length=4, blank=True, null=True)
     addamenityinfo = models.CharField(max_length=300, blank=True, null=True)
-    image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100,blank=True, null=True )
+    image = models.ImageField(upload_to="images/",default="images/image_coming_soon.png", height_field=None, width_field=None, max_length=100,blank=True, null=True)
     #need to upate forms to account for hometype, size, beds, bath
     
    
