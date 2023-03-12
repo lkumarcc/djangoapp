@@ -41,8 +41,8 @@ def add_listing(request):
     return render(request, "hello/add_listing.html", {'form': form, 'submitted': submitted} )
 
 def profile(request):
-    addyinfo = allinformation.objects.filter(user=request.user).last()
-    return render(request, "hello/profile.html", {'addyinfo': addyinfo,} )
+    user_listings = allinformation.objects.filter(user=request.user)
+    return render(request, "hello/profile.html", {'user_listings': user_listings,} )
 
 def messages(request):
     return render(request, "hello/messages.html")
