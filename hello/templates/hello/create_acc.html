@@ -33,9 +33,9 @@
                 
                 <form action = "/userdisplay/" method = "post">
                   {% csrf_token %}
-                    <p><label for="email" style="display:inline-block; width:100px" >School Email:</label><input type="text" id="email" name="email" style="margin-bottom:10px; margin-left:5px " pattern = "[a-zA-Z0-9]+@[a-zA-Z]+.edu" required></p>
-                    <p><label for="firstname" style="display:inline-block; width:100px">First Name:</label><input type="text" id="firstname" name="firstname" style="margin-bottom:10px; margin-left:5px" required></p>
-                    <p><label for="lastname" style="display:inline-block; width:100px">Last Name:</label><input type="text" id="lastname" name="lastname" style="margin-bottom:10px; margin-left:5px" required></p>
+                    <p><label for="email" style="display:inline-block; width:100px" >School Email (.edu):</label><input type="text" id="email" name="email" style="margin-bottom:10px; margin-left:5px " pattern = "[a-zA-Z0-9]+@[a-zA-Z]+.edu" required></p>
+                    <p><label for="firstname" style="display:inline-block; width:100px">First Name:</label><input type="text" id="firstname" name="firstname" style="margin-bottom:10px; margin-left:5px" pattern = "[A-Za-z '-]+" required></p>
+                    <p><label for="lastname" style="display:inline-block; width:100px">Last Name:</label><input type="text" id="lastname" name="lastname" style="margin-bottom:10px; margin-left:5px" pattern = "[A-Za-z '-]+" required></p>
                     <p><label for="phone" style="display:inline-block; width:100px">Phone Number:</label><input type="text" id="phone" name="phone" style="margin-bottom:10px; margin-left:5px;" pattern = "^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"required></p>
                     <p><label for="gender" style="display:inline-block; width:100px">Gender:</label><select name="gender" style="margin-left:5px" required><option value="" disabled selected hidden></option><option value="Female">Female</option><option value="Male">Male</option><option value="Other">Other</option></select></p>
                     <p><label for="username" style="display:inline-block; width:100px">Create Username:</label><input type="text" id="username" name="username" style="margin-bottom:10px; margin-left:5px" required></p>

@@ -87,6 +87,7 @@ HOMETYPE_CHOICES= (
 ('', ''),
 ('apartment','Apartment'),
 ('house','House'),
+('townhome',"Townhome"),
 )
 
 GENDER_CHOICES= (
