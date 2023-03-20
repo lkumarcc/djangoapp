@@ -114,6 +114,7 @@ LAUNDRY_CHOICES= (
 ('Out Of Unit','Out of Unit'),
 ('No','No'),
 )
+
 class AddListingForm(ModelForm):
     address = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'title':'Example: 123456 Street Name', 'maxLength': 75}), required=True, validators=[address_validation])
     city = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'maxLength': 30}), required=True, validators=[letters_only])
@@ -125,11 +126,11 @@ class AddListingForm(ModelForm):
     numbertenants = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Example: 4', 'maxLength': 2}), required=True, validators=[numbers_only], label="Total Number of Tenants")
     gender = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=GENDER_CHOICES),required =True)
     beds = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Example: 4', 'maxLength': 2}), required=True, validators=[numbers_only], label="Bedrooms Available")
-    addrentinfo = forms.CharField(widget=forms.Textarea(attrs = {'class':'form-control','title': 'Utilities not included in rent, upper property in duplex, two entrances to apartment, etc.', 'maxLength': 300}), label="Additional Information", required=False)
+    addrentinfo = forms.CharField(widget=forms.Textarea(attrs = {'class':'form-control','placeholder': 'Availible time for subletting (month-month); what sublet comes with (i.e. bed/desk/etc); Upper property in duplex; Two entrances to apartment; Backyard pool; Living room Tv;  etc.', 'maxLength': 300}), label="Additional Information", required=False)
     parking = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=PARKING_CHOICES),required =True)
     pets = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=PETS_CHOICES),label="Pet Friendly", required =True)
     laundry = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=LAUNDRY_CHOICES),required =True)
-    addamenityinfo = forms.CharField(widget=forms.Textarea(attrs = {'class':'form-control','title': 'Backyard pool, large front porch, fireplace in living room, etc.', 'maxLength': 300}), label="Additional Amenities", required=False)
+    addamenityinfo = forms.CharField(widget=forms.Textarea(attrs = {'class':'form-control','placeholder': 'Living habits of housemates; Extreme allergies of housemates; etc  ', 'maxLength': 300}), label="Preferances and Living Habits", required=False)
     image = forms.ImageField(label="Listing Main Image", required=False, validators=[FileExtensionValidator(['jpg'])])
 
 

@@ -138,7 +138,7 @@
                     <!--<p><img class="img-fluid" src="{% static 'hello/images/icon-streaming.png'%}" alt="Icon" style="width: 30px; height: 30px;">Streaming Services: {{addyinfo.streamingservices}}</p>-->
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-misc.png'%}" alt="Icon" style="width: 30px; height: 30px;">Additional Amenities: {{addyinfo.addamenityinfo}}</p>
                     <!-- Security Deposit-->
-                    <p class="mb-4">Estimated Monthly Utilites: {{addyinfo.securitydeposit}}</p>
+                    <p class="mb-4">Security Deposit: {{addyinfo.securitydeposit}}</p>
                     <form action = "/addFavorites/" method = "post">
                         {% csrf_token %}
                         <button class="btn btn-primary py-1 px-3 me-1 animated fadeIn" type="submit" name = "favorite" value={{addyinfo.id}}>                        
