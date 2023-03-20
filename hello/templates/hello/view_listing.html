@@ -131,14 +131,14 @@
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-person.png'%}" alt="Icon" style="width: 30px; height: 30px;">Gender (Fluid/Female-Only/Male-Only): {{addyinfo.gender}}</p>
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-parking.png'%}" alt="Icon" style="width: 30px; height: 30px;">Parking: {{addyinfo.parking}}</p>
                     <!--<p><img class="img-fluid" src="{% static 'hello/images/icon-wifi.png'%}" alt="Icon" style="width: 30px; height: 30px;">Internet: {{addyinfo.internet}}</p>-->
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-pet.png'%}" alt="Icon" style="width: 30px; height: 30px;">Pets: {{addyinfo.pets}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-pet.png'%}" alt="Icon" style="width: 30px; height: 30px;">Pet Friendly: {{addyinfo.pets}}</p>
                     <!--<p><img class="img-fluid" src="{% static 'hello/images/icon-ac.png'%}" alt="Icon" style="width: 30px; height: 30px;">Air Conditioning: {{addyinfo.aircond}}</p>-->
                     <!--<p><img class="img-fluid" src="{% static 'hello/images/icon-heat.png'%}" alt="Icon" style="width: 30px; height: 30px;">Heating: {{addyinfo.heating}}</p>-->
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-laundry.png'%}" alt="Icon" style="width: 30px; height: 30px;">Laundry: {{addyinfo.laundry}}</p>
                     <!--<p><img class="img-fluid" src="{% static 'hello/images/icon-streaming.png'%}" alt="Icon" style="width: 30px; height: 30px;">Streaming Services: {{addyinfo.streamingservices}}</p>-->
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-misc.png'%}" alt="Icon" style="width: 30px; height: 30px;">Additional Amenities: {{addyinfo.addamenityinfo}}</p>
                     <!-- Security Deposit-->
-                    <p class="mb-4">Security Deposit: {{addyinfo.securitydeposit}}</p>
+                    <p class="mb-4">Estimated Monthly Utilites: {{addyinfo.securitydeposit}}</p>
                     <form action = "/addFavorites/" method = "post">
                         {% csrf_token %}
                         <button class="btn btn-primary py-1 px-3 me-1 animated fadeIn" type="submit" name = "favorite" value={{addyinfo.id}}>                        
