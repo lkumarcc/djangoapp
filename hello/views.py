@@ -22,7 +22,10 @@ def home(request):
 
 def profile(request):
     user_listings = allinformation.objects.filter(user=request.user)
-    return render(request, "hello/profile.html", {'user_listings': user_listings,} )
+    uiList = userinfo.objects.filter(username=request.user)  
+    ui = uiList.first()
+    #"email=" looks at email in database columns, what are the things I can request though? 
+    return render(request, "hello/profile.html", {'user_listings': user_listings,'ui': ui,} )
 
 def messages(request):
     return render(request, "hello/messages.html")

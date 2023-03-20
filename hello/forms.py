@@ -21,7 +21,7 @@ class LogMessageForm(forms.ModelForm):
 class CreateUserForm(forms.ModelForm):
     class Meta:
         model = userinfo
-        fields = ("email", "phone", "gender", "firstname", "lastname", "username","password",)
+        fields = ("email", "phone", "gender", "firstname", "lastname", "username","password", "school",) 
 
 STATE_CHOICES= (
         ('',''),
@@ -85,34 +85,34 @@ STATE_CHOICES= (
 
 HOMETYPE_CHOICES= (
 ('', ''),
-('apartment','Apartment'),
-('house','House'),
-('townhome',"Townhome"),
+('Apartment','Apartment'),
+('House','House'),
+('Townhome',"Townhome"),
 )
 
 GENDER_CHOICES= (
 ('', ''),
-('women only','Women Only'),
-('men only','Men Only'),
-('all inclusive','All inclusive'),
+('Women Only','Women Only'),
+('Men Only','Men Only'),
+('All Inclusive','All inclusive'),
 )
 PARKING_CHOICES= (
 ('', ''),
-('yes','Yes'),
-('no','No'),
+('Yes','Yes'),
+('No','No'),
 )
 
 PETS_CHOICES= (
 ('', ''),
-('yes','Yes'),
-('no','No'),
+('Yes','Yes'),
+('No','No'),
 )
 
 LAUNDRY_CHOICES= (
 ('', ''),
-('in unit','In Unit'),
-('out of unit','Out of Unit'),
-('no','No'),
+('In Unit','In Unit'),
+('Out Of Unit','Out of Unit'),
+('No','No'),
 )
 class AddListingForm(ModelForm):
     address = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'title':'Example: 123456 Street Name', 'maxLength': 75}), required=True, validators=[address_validation])
