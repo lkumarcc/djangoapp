@@ -173,7 +173,9 @@ def log_message(request):
 def userdisplay(request):
     form = CreateUserForm(request.POST or None)
     if request.method == "POST":
+        print("test1")
         if form.is_valid():
+            print("test2")
             # message = form.save(commit=False)
             first = request.POST.get("firstname")
             last = request.POST.get("lastname")
@@ -190,6 +192,7 @@ def userdisplay(request):
             print(new_user)
             return render(request, "hello/login_home.html")
         else:
+            print(form.errors)
             return render(request, "hello/test.html")
 
 
