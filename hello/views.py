@@ -18,7 +18,7 @@ class HomeListView(ListView):
     #this cant be inside here but theres nowhere else to put it, need new homepage
 
 def home(request):
-    shome_list = allinformation.objects.all()
+    shome_list = allinformation.objects.all().exclude(user=request.user)
     return render(request, 'hello/home.html', {'shome_list': shome_list})
 
 def profile(request):
