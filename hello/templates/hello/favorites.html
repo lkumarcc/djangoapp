@@ -53,7 +53,7 @@
             <div class="navbar-nav ms-auto">
                 <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
                 <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                <a href="{% url 'messages' %}" class="nav-item nav-link">Messages</a>
+                <a href="{% url 'message' %}" class="nav-item nav-link">Messages</a>
                 <a href="{% url 'favorites' %}" class="nav-item nav-link active">Favorites</a>
                 <a href="{% url 'listing' %}" class="nav-item nav-link">My Listing</a>
                 <a href="{% url 'add_listing' %}" class="nav-item nav-link">Add Listing</a>
@@ -96,12 +96,12 @@
         </div>
     </div>
     <!-- Search End -->
-    {% if messages %}
+    {% comment %} {% if messages %}
         {% for message in messages %}
         <script>alert("{{ message }}")</script>
 
         {% endfor %}
-    {% endif %}
+    {% endif %} {% endcomment %}
  
     <!-- Property List Start -->
     <div class="container-xxl py-5">
@@ -151,6 +151,13 @@
                                         <small class="flex-fill text-center border-end py-2"><img class="img-fluid " src="{% static 'hello/images/icon-bed.png'%}" alt="Icon" style="width: 20px; height: 20px;"></img> {{listing.beds}}</small>
                                         <small class="flex-fill text-center py-2"><img class="img-fluid" src="{% static 'hello/images/icon-pet.png'%}" alt="Icon" style="width: 25px; height: 25px;"></img> {{listing.pets}}</small>
                                     </div>
+                                                                
+                                    {% comment %} <form action = "/delete_favorite/" method = "post">
+                                        {% csrf_token %}
+                                        <label for="delete_favorite"></label>
+                                        <input name="delete_favorite" class="btn btn-danger mt-4" type="submit" value="{{listing.id}}" onclick="return confirm('Are you sure you would like to delete this listing?')"/>   
+                                    </form>       {% endcomment %}
+                                    <a href="{% url 'delete_favorite' listing.id%}" class="btn btn-outline-danger">Delete Listing</a>
                                 </div>
                             </a>
                         </div>
@@ -158,7 +165,7 @@
             
                         <!-- Add Functionality-->
                         <div class="col-12 text-center">
-                            <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                            <a class="btn btn-primary py-3 px-5" href="{% url 'home'%}">Browse More Property</a>
                         </div>
                     </div>
                 </div>

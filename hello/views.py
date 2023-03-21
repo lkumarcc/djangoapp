@@ -8,8 +8,9 @@ from django.views.generic import ListView
 from .models import Profile, addListings, userinfo, Shome, allinformation, Favorite
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .forms import AddListingForm
+from .forms import AddListingForm, DeleteFavorites
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
@@ -22,25 +23,46 @@ def home(request):
 
 def profile(request):
     user_listings = allinformation.objects.filter(user=request.user)
-    uiList = userinfo.objects.filter(username=request.user)  
-    ui = uiList.first()
-    #"email=" looks at email in database columns, what are the things I can request though? 
-    return render(request, "hello/profile.html", {'user_listings': user_listings,'ui': ui,} )
+    return render(request, "hello/profile.html", {'user_listings': user_listings,} )
 
-def messages(request):
-    return render(request, "hello/messages.html")
+def message(request):
+    return render(request, "hello/message.html")
+
+def delete_favorite(request, listingid):
+    listing = Favorite.objects.get(listing_id = listingid)
+    listing.delete()
+    return redirect("/favorites")
+    
+    
+    # print("test1")
+    # if request.method =='POST':
+    #     print("test post")
+    #     # create a form instance and populate it with data from the request:
+    #     form = DeleteFavorites(request.POST)
+    #     # check whether it's valid:
+    #     if form.is_valid():
+    #         form=form.save(commit=False)
+    #         listing_delete = form.cleaned_data['listing_id']
+    #         print(listing_delete, "?")
+    #         Favorite.objects.get(listing_id=listing_delete).delete()
+    #         print(Favorite.objects.get.all())
+    #         # process the data in form.cleaned_data as required
+    #         # ...
+    #         # redirect to a new URL:
+    #         return HttpResponseRedirect('/favorites/')
+    #     else:
+    #         print(form.errors.as_data())
+    # return HttpResponseRedirect('/favorites/')
 
 def favorites(request):
+    #handle accessing user favorites
     listingid = list(Favorite.objects.filter(user=request.user).values("listing_id"))
-    print("test3")
-    print(listingid)
     listingnums = []
-    
     for item in listingid:
         listingnums.append(item["listing_id"])
-
     favorite_listings = allinformation.objects.filter(pk__in=listingnums)
-    return render(request, "hello/favorites.html", {'favorite_listings': favorite_listings})
+    
+    return render(request, "hello/favorites.html", {'favorite_listings': favorite_listings, 'messages': messages})
 
 def about(request):
     return render(request, "hello/about.html")
@@ -173,9 +195,7 @@ def log_message(request):
 def userdisplay(request):
     form = CreateUserForm(request.POST or None)
     if request.method == "POST":
-        print("test1")
         if form.is_valid():
-            print("test2")
             # message = form.save(commit=False)
             first = request.POST.get("firstname")
             last = request.POST.get("lastname")
@@ -192,7 +212,6 @@ def userdisplay(request):
             print(new_user)
             return render(request, "hello/login_home.html")
         else:
-            print(form.errors)
             return render(request, "hello/test.html")
 
 
@@ -226,39 +245,32 @@ def logoutuser(request):
     
 def addFavorites(request):
     if request.method == "POST":
+        #get id number
         listingid = request.POST.get("favorite")
         listing = allinformation.objects.filter(id = listingid).first()
-        print(listing)
+        print(listingid, listing)
         if listing is not None:
+            #check if the item exists
             user = request.user
-            Favorite(user = user, listing = listing).save()
-            listingid = list(Favorite.objects.filter(user=request.user).values("listing_id"))
-            listingnums = []
-    
-            for item in listingid:
-                listingnums.append(item["listing_id"])
+            listingid = list(Favorite.objects.filter(user=request.user).filter(listing_id = listingid))
 
-            favorite_listings = allinformation.objects.filter(pk__in=listingnums)
-            return render(request, "hello/favorites.html", {'favorite_listings': favorite_listings})
+            #if does return error and rerender page
+            if len(listingid) >= 1:
+                messages.error(request, 'You have already favorited this listing.')
+                return render(request, "hello/view_listing.html", {'addyinfo': listing})
+            #if doesn't add listing, add success message, and redirect
+            else:
+                user = request.user
+                Favorite(user = user, listing = listing).save()
+                messages.success(request, 'Your listing has been added to favorites!')
+                return render(request, "hello/view_listing.html", {'addyinfo': listing})
         else:
-            return render(request, "/")
+            return render(request, "hello/view_listing.html", {'addyinfo': listing})
     else:
-        return render(request, "/")
+        return redirect("/home")
             
             
-        
 
-
-# if userinfo.objects.filter(email=checkemail).exists():
-#         userdata = userinfo.objects.filter(email=checkemail).values()[0]
-#         print(userdata["password"])
-#         if userdata["password"] == checkpassword:
-#             return render(request, "hello/home.html")
-#         else:
-#             return render(request, "hello/create_acc.html")
-#     else:
-#         return render(request, "hello/test.html")
-            
             
             
             

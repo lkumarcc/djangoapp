@@ -18,7 +18,7 @@ urlpatterns = [
     path("about/", views.about, name="about"),
     path("hello/<name>", views.hello_there, name="hello_there"),
     path("profile/", views.profile, name="profile"),
-    path("messages/", views.messages, name="messages"),
+    path("message/", views.message, name="message"),
     path("favorites/", views.favorites, name="favorites"),
     path("listing", views.listing, name="listing"),
     path("add_listing", views.add_listing, name="add_listing"),
@@ -33,6 +33,7 @@ urlpatterns = [
     path("logoutuser/", views.logoutuser, name="logoutuser"), 
     path("search_listings/", views.search_listings, name="search_listings"), 
     path("addFavorites/", views.addFavorites, name="addFavorites"), 
+    path("delete_favorite/<int:listingid>", views.delete_favorite, name="delete_favorite"), 
     # path("all-ammenities/", views.all_ammenities, name="all_amenities")
 
     

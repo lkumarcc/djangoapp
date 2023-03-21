@@ -21,7 +21,7 @@ class LogMessageForm(forms.ModelForm):
 class CreateUserForm(forms.ModelForm):
     class Meta:
         model = userinfo
-        fields = ("email", "phone", "gender", "firstname", "lastname", "username","password", "school",) 
+        fields = ("email", "phone", "gender", "firstname", "lastname", "username","password",)
 
 STATE_CHOICES= (
         ('',''),
@@ -85,36 +85,35 @@ STATE_CHOICES= (
 
 HOMETYPE_CHOICES= (
 ('', ''),
-('Apartment','Apartment'),
-('House','House'),
-('Townhome',"Townhome"),
+('apartment','Apartment'),
+('house','House'),
+('townhome',"Townhome"),
 )
 
 GENDER_CHOICES= (
 ('', ''),
-('Women Only','Women Only'),
-('Men Only','Men Only'),
-('All Inclusive','All inclusive'),
+('women only','Women Only'),
+('men only','Men Only'),
+('all inclusive','All inclusive'),
 )
 PARKING_CHOICES= (
 ('', ''),
-('Yes','Yes'),
-('No','No'),
+('yes','Yes'),
+('no','No'),
 )
 
 PETS_CHOICES= (
 ('', ''),
-('Yes','Yes'),
-('No','No'),
+('yes','Yes'),
+('no','No'),
 )
 
 LAUNDRY_CHOICES= (
 ('', ''),
-('In Unit','In Unit'),
-('Out Of Unit','Out of Unit'),
-('No','No'),
+('in unit','In Unit'),
+('out of unit','Out of Unit'),
+('no','No'),
 )
-
 class AddListingForm(ModelForm):
     address = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'title':'Example: 123456 Street Name', 'maxLength': 75}), required=True, validators=[address_validation])
     city = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'maxLength': 30}), required=True, validators=[letters_only])
@@ -122,15 +121,15 @@ class AddListingForm(ModelForm):
     state = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=STATE_CHOICES),required =True)
     hometype = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=HOMETYPE_CHOICES),required =True, label="Home Type")
     monthlyprice = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Example: 450', 'maxLength': 4}), required=True, validators=[numbers_only], label="Monthly Lease Price")
-    securitydeposit = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Example: 700', 'maxLength': 4}), required=True, validators=[numbers_only], label="Estimated Monthly Utilites")
+    securitydeposit = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Example: 700', 'maxLength': 4}), required=True, validators=[numbers_only], label="Security Deposit")
     numbertenants = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Example: 4', 'maxLength': 2}), required=True, validators=[numbers_only], label="Total Number of Tenants")
     gender = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=GENDER_CHOICES),required =True)
     beds = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Example: 4', 'maxLength': 2}), required=True, validators=[numbers_only], label="Bedrooms Available")
-    addrentinfo = forms.CharField(widget=forms.Textarea(attrs = {'class':'form-control','placeholder': 'Availible time for subletting (month-month); what sublet comes with (i.e. bed/desk/etc); Upper property in duplex; Two entrances to apartment; Backyard pool; Living room Tv;  etc.', 'maxLength': 300}), label="Additional Information", required=False)
+    addrentinfo = forms.CharField(widget=forms.Textarea(attrs = {'class':'form-control','title': 'Utilities not included in rent, upper property in duplex, two entrances to apartment, etc.', 'maxLength': 300}), label="Additional Information", required=False)
     parking = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=PARKING_CHOICES),required =True)
-    pets = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=PETS_CHOICES),label="Pet Friendly", required =True)
+    pets = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=PETS_CHOICES),required =True)
     laundry = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=LAUNDRY_CHOICES),required =True)
-    addamenityinfo = forms.CharField(widget=forms.Textarea(attrs = {'class':'form-control','placeholder': 'Living habits of housemates; Extreme allergies of housemates; etc  ', 'maxLength': 300}), label="Preferances and Living Habits", required=False)
+    addamenityinfo = forms.CharField(widget=forms.Textarea(attrs = {'class':'form-control','title': 'Backyard pool, large front porch, fireplace in living room, etc.', 'maxLength': 300}), label="Additional Amenities", required=False)
     image = forms.ImageField(label="Listing Main Image", required=False, validators=[FileExtensionValidator(['jpg'])])
 
 
@@ -139,3 +138,6 @@ class AddListingForm(ModelForm):
         #match database fields 
         fields = ( "address", "city", "zip", "state","hometype", "monthlyprice", "securitydeposit", "numbertenants", "gender", "beds", "addrentinfo", "parking", "pets", "laundry", "addamenityinfo","image")
         exclude = ['user']
+        
+class DeleteFavorites(forms.Form):
+    listing_id = forms.CharField(label='listing_id', max_length=100)

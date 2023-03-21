@@ -55,7 +55,7 @@
             <div class="navbar-nav ms-auto">
                 <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
                 <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                <a href="{% url 'messages' %}" class="nav-item nav-link">Messages</a>
+                <a href="{% url 'message' %}" class="nav-item nav-link">Messages</a>
                 <a href="{% url 'favorites' %}" class="nav-item nav-link">Favorites</a>
                 <a href="{% url 'listing' %}" class="nav-item nav-link active">My Listing</a>
                 <a href="{% url 'add_listing' %}" class="nav-item nav-link">Add Listing</a>
@@ -73,9 +73,8 @@
             <div class="col-md-6 p-5 mt-lg-2">
                 <!--Address-->
                 <!--<h1 class="display-5 animated fadeIn mb-4">47834 <span class="text-primary">Freret Street</span> New Orleans, LA 70118</h1>-->
-                <h1 class="display-5 animated fadeIn mb-4">{{addyinfo.address}} <span class="text-primary">{{addyinfo.city}}, {{addyinfo.state}}</span> {{addyinfo.zip}}</h1>
+                <h1 class="display-5 animated fadeIn mb-4">{{addyinfo.address}}, <span class="text-primary">{{addyinfo.city}}, {{addyinfo.state}}</span> {{addyinfo.zip}}</h1>
                 <!-- Description -->
-                <!-- <h1 class="mb-4">Owner: </span> {{user.first_name}} {{user.last_name}}</h1> -->
                 <p class="animated fadeIn mb-4 pb-2">{{addyinfo.addrentinfo}} </p>
                 <p><img class="img-fluid" src="{% static 'hello/images/icon-tenants.png'%}" alt="Icon" style="width: 30px; height: 30px;">Total Number of Tenants: {{addyinfo.numbertenants}}</p>
                 <p><img class="img-fluid" src="{% static 'hello/images/icon-bed.png'%}" alt="Icon" style="width: 30px; height: 30px;">Bedrooms Available: {{addyinfo.beds}}</p>
@@ -131,22 +130,16 @@
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-person.png'%}" alt="Icon" style="width: 30px; height: 30px;"> Gender (Fluid/Female-Only/Male-Only): {{addyinfo.gender}}</p>
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-parking.png'%}" alt="Icon" style="width: 30px; height: 30px;">Parking: {{addyinfo.parking}}</p>
                     <!--<p><img class="img-fluid" src="{% static 'hello/images/icon-wifi.png'%}" alt="Icon" style="width: 30px; height: 30px;">Internet: {{addyinfo.internet}}</p>-->
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-pet.png'%}" alt="Icon" style="width: 30px; height: 30px;">Pet Friendly: {{addyinfo.pets}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-pet.png'%}" alt="Icon" style="width: 30px; height: 30px;">Pets: {{addyinfo.pets}}</p>
                     <!--<p><img class="img-fluid" src="{% static 'hello/images/icon-ac.png'%}" alt="Icon" style="width: 30px; height: 30px;">Air Conditioning: {{addyinfo.aircond}}</p>-->
                     <!--<p><img class="img-fluid" src="{% static 'hello/images/icon-heat.png'%}" alt="Icon" style="width: 30px; height: 30px;">Heating: {{addyinfo.heating}}</p>-->
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-laundry.png'%}" alt="Icon" style="width: 30px; height: 30px;">Laundry: {{addyinfo.laundry}}</p>
                     <!--<p><img class="img-fluid" src="{% static 'hello/images/icon-streaming.png'%}" alt="Icon" style="width: 30px; height: 30px;">Streaming Services: {{addyinfo.streamingservices}}</p>-->
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-misc.png'%}" alt="Icon" style="width: 30px; height: 30px;">Preferences and Living Habits: {{addyinfo.addamenityinfo}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-misc.png'%}" alt="Icon" style="width: 30px; height: 30px;">Additional Amenities: {{addyinfo.addamenityinfo}}</p>
                     <!-- Security Deposit-->
-                    <p class="mb-4">Estimated Monthly Utilites: {{addyinfo.securitydeposit}}</p>
+                    <p class="mb-4">Security Deposit: {{addyinfo.securitydeposit}}</p>
 
-                    <form action = "/addFavorites/" method = "post">
-                        {% csrf_token %}
-                        <button class="btn btn-primary py-1 px-3 me-1 animated fadeIn" type="submit" name = "favorite" value={{addyinfo.id}}>                        
-                            <img class="img-fluid" src="{% static 'hello/images/icon-favorite.png'%}" alt="Icon" style="width: 60px; height: 60px;">
-                            Favorite
-                        </button>
-                    </form>
+                
                     
                     <!--Property Availability -->
                     <a href="" class="btn btn-dark py-3 px-4"><i class="fa fa-calendar-alt me-2"></i>Availability</a>
@@ -163,9 +156,8 @@
                 <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
                     <div class="row g-5 align-items-center">
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                            <!--Insert Image of Owner (Make sure to restrict size of this lol)
+                            <!--Insert Image of Owner (Make sure to restrict size of this lol)-->
                             <img class="img-fluid rounded w-100" src="{% static 'hello/images/kayla-headshot.jpg' %}" alt="">
-                            -->
                         </div>
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                             <div class="mb-4">

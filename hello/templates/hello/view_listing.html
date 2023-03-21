@@ -56,7 +56,7 @@
                 <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
                 <a href="" class="nav-item nav-link active">View Listing</a>
                 <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                <a href="{% url 'messages' %}" class="nav-item nav-link">Messages</a>
+                <a href="{% url 'message' %}" class="nav-item nav-link">Messages</a>
                 <a href="{% url 'favorites' %}" class="nav-item nav-link">Favorites</a>
                 <a href="{% url 'listing' %}" class="nav-item nav-link">My Listing</a>
                 <a href="{% url 'add_listing' %}" class="nav-item nav-link">Add Listing</a>
@@ -65,6 +65,13 @@
         </nav>
     </div>
     <!-- Nav Bar Ends-->
+
+    {% if messages %}
+        {% for message in messages %}
+            <script>alert("{{ message }}")</script>
+
+        {% endfor %}
+    {% endif %}
    
  
  
@@ -131,7 +138,7 @@
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-person.png'%}" alt="Icon" style="width: 30px; height: 30px;">Gender (Fluid/Female-Only/Male-Only): {{addyinfo.gender}}</p>
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-parking.png'%}" alt="Icon" style="width: 30px; height: 30px;">Parking: {{addyinfo.parking}}</p>
                     <!--<p><img class="img-fluid" src="{% static 'hello/images/icon-wifi.png'%}" alt="Icon" style="width: 30px; height: 30px;">Internet: {{addyinfo.internet}}</p>-->
-                    <p><img class="img-fluid" src="{% static 'hello/images/icon-pet.png'%}" alt="Icon" style="width: 30px; height: 30px;">Pet Friendly: {{addyinfo.pets}}</p>
+                    <p><img class="img-fluid" src="{% static 'hello/images/icon-pet.png'%}" alt="Icon" style="width: 30px; height: 30px;">Pets: {{addyinfo.pets}}</p>
                     <!--<p><img class="img-fluid" src="{% static 'hello/images/icon-ac.png'%}" alt="Icon" style="width: 30px; height: 30px;">Air Conditioning: {{addyinfo.aircond}}</p>-->
                     <!--<p><img class="img-fluid" src="{% static 'hello/images/icon-heat.png'%}" alt="Icon" style="width: 30px; height: 30px;">Heating: {{addyinfo.heating}}</p>-->
                     <p><img class="img-fluid" src="{% static 'hello/images/icon-laundry.png'%}" alt="Icon" style="width: 30px; height: 30px;">Laundry: {{addyinfo.laundry}}</p>

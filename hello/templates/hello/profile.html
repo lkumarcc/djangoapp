@@ -55,7 +55,7 @@
             <div class="navbar-nav ms-auto">
                 <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
                 <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                <a href="{% url 'messages' %}" class="nav-item nav-link">Messages</a>
+                <a href="{% url 'message' %}" class="nav-item nav-link">Messages</a>
                 <a href="{% url 'favorites' %}" class="nav-item nav-link">Favorites</a>
                 <a href="{% url 'listing' %}" class="nav-item nav-link">My Listing</a>
                 <a href="{% url 'add_listing' %}" class="nav-item nav-link">Add Listing</a>
@@ -75,20 +75,13 @@
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
                   <h5 class="my-3">{{user.first_name}} {{user.last_name}}</h5>
-                 <!-- <p class="text-muted mb-1">Full Stack Developer</p> 
-                      <p class="text-muted mb-4">bay area, san franscsco, ca</p> -->
-
+                  <p class="text-muted mb-1">Full Stack Developer</p>
+                  <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
                   <div class="d-flex justify-content-center mb-2">
                     <form action = "/logoutuser/" method = "post" >
                       {% csrf_token %}
                       <input class="btn btn-outline-primary ms-1"  value="Logout" type="submit"/>
                     </form>
-                    <!-- want this to be a delete accoutn button later
-                    <form action = "/logoutuser/" method = "post" >
-                      {% csrf_token %}
-                      <input class="btn btn-outline-primary ms-1"  value="Logout" type="submit"/>
-                    </form>
-                    -->
                   </div>
                 </div>
               </div>
@@ -154,17 +147,16 @@
                       <p class="mb-0">Phone</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{ui.phone}}</p>
+                      <p class="text-muted mb-0">{{user.phone}}</p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0">School</p>
+                      <p class="mb-0">Password</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{ui.school}}
-                        <!--<a class="btn btn-outline-primary" href="">Change Password</a> we should move change password button and replace this field with school-->
+                      <p class="text-muted mb-0">{{user.password}}<a class="btn btn-outline-primary" href="">Change Password</a>
                       </p>
                     </div>
                   </div>
