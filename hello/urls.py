@@ -20,7 +20,6 @@ urlpatterns = [
     path("profile/", views.profile, name="profile"),
     path("message/", views.message, name="message"),
     path("favorites/", views.favorites, name="favorites"),
-    path("listing", views.listing, name="listing"),
     path("add_listing", views.add_listing, name="add_listing"),
     path("edit_listing/<str:pk>/", views.edit_listing, name="edit_listing"),
     path("view_listing/<int:listing_id>", views.view_listing, name="view_listing"),

@@ -99,16 +99,6 @@ def search_listings(request):
     else:
         return render(request, "hello/search_listings.html",{})
 
-
-
-def listing(request):
-    addyinfo = allinformation.objects.filter(user=request.user).last()
-    if addyinfo==None: 
-        return add_listing(request)
-    
-    # addyinfo = allinformation.objects.first()
-    return render(request, "hello/listing.html", {'addyinfo': addyinfo,})
-
 def add_listing(request):
     submitted = False
     if request.method =='POST':
