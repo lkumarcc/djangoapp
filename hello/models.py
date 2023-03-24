@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.db.models.signals import post_save # Produce a signal if there is any database action.
 
 class LogMessage(models.Model):
     message = models.CharField(max_length=300)
@@ -13,23 +14,39 @@ class LogMessage(models.Model):
         date = timezone.localtime(self.log_date)
         return f"'{self.message}' logged on {date.strftime('%A, %d %B, %Y at %X')}"
 
-@receiver(post_save, sender=User)
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        user_profile = Profile(user=instance)
-        user_profile.save()
-        # user_profile.follows.set([instance.profile.id])
-        # user_profile.save()
 
-# Create a Profile for each new user.
-#post_save.connect(create_profile, sender=User)
 
 #info from dwitter
 # to couple each profile to exactly one user
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-     
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+   # email = models.CharField(max_length=30, blank=True, null=True)
+    phone = models.CharField(max_length=12, blank=True, null=True)
+    gender = models.CharField(max_length=12, blank=True, null=True)
+   # firstname = models.CharField(max_length=12, blank=True, null=True)
+   # lastname = models.CharField(max_length=12, blank=True, null=True)
+   # username = models.CharField(max_length=12, blank=True, null=True)
+   # password = models.CharField(max_length=12, blank=True, null=True)
+    school = models.CharField(max_length=30, blank=True, null=True)
+    bio = models.CharField(max_length=100, blank=True, null=True)  
+    profile_pic = models.ImageField(upload_to="images/profilepics/",default="images/profilepics/default_profile_pic.jpg", height_field=None, width_field=None, max_length=100,blank=True, null=True)
+    city = models.CharField(max_length=200, blank=True, null=True)
+    state = models.CharField(max_length=22, blank=True, null=True)
+    insta = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return str(self.user)
     
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
 class addListings(models.Model):
     address = models.CharField(max_length=200, blank=True, null=True)
     city = models.CharField(max_length=200, blank=True, null=True)
@@ -93,19 +110,7 @@ class amenityinfo(models.Model):
     laundry = models.CharField(max_length=20, blank=True, null=True)
     #streamingservices = models.CharField(max_length=4, blank=True, null=True)
     addamenityinfo = models.CharField(max_length=300, blank=True, null=True)
-'''
-
-class userinfo(models.Model):
-    email = models.CharField(max_length=30, blank=True, null=True)
-    phone = models.CharField(max_length=12, blank=True, null=True)
-    gender = models.CharField(max_length=12, blank=True, null=True)
-    firstname = models.CharField(max_length=12, blank=True, null=True)
-    lastname = models.CharField(max_length=12, blank=True, null=True)
-    username = models.CharField(max_length=12, blank=True, null=True)
-    password = models.CharField(max_length=12, blank=True, null=True)
-    school = models.CharField(max_length=30, blank=True, null=True)
-    # models.IntegerField(blank=True, null=True)
-    
+'''    
 
 class Shome(models.Model):
     hometype = models.CharField(max_length=100, blank=True, null=True)
@@ -119,4 +124,3 @@ class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     listing =  models.ForeignKey(allinformation, on_delete=models.CASCADE)
     
-#test 

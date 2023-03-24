@@ -30,23 +30,28 @@
                 <h2 class="fw-bold mb-2 text-uppercase text-white">Create Account</h2>
                 <p class="text-white-50 mb-5">Please enter your information!</p>
 
+                <form action="{% url 'create_acc' %}" method=POST>
+                  {% csrf_token %}
+                  {{form.as_p}}
+                  <input class="btn-lg btn-primary ms-1 text-white"   type="submit">
+                </form>
                 
-                <form action = "/userdisplay/" method = "post">
+                <!--
+                <form action = "/create_user/" method = "post">
                   {% csrf_token %}
                     <p><label for="email" style="display:inline-block; width:100px" >School Email (.edu):</label><input type="text" placeholder="Example@University.edu" id="email" name="email" style="margin-bottom:10px; margin-left:5px " pattern = "[a-zA-Z0-9]+@[a-zA-Z]+.edu" required></p>
                     <p><label for="firstname" style="display:inline-block; width:100px">First Name:</label><input type="text" id="firstname" name="firstname" style="margin-bottom:10px; margin-left:5px" pattern = "[A-Za-z '-]+" required></p>
                     <p><label for="lastname" style="display:inline-block; width:100px">Last Name:</label><input type="text" id="lastname" name="lastname" style="margin-bottom:10px; margin-left:5px" pattern = "[A-Za-z '-]+" required></p>
-                    <!--<p><label for="school" style="display:inline-block; width:100px">School:</label><input type="text" id="school" name="school" style="margin-bottom:10px; margin-left:5px" pattern = "[A-Za-z-'&]+" required></p>-->
-                    <p><label for="phone" style="display:inline-block; width:100px">Phone Number:</label><input type="text" id="phone" name="phone" style="margin-bottom:10px; margin-left:5px;" pattern = "^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"required></p>
+                    <p><label for="phone" style="display:inline-block; width:100px">Phone Number:</label><input type="text" id="phone" name="phone" style="margin-bottom:10px; margin-left:5px;" pattern = "^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"></p>
                     <p><label for="gender" style="display:inline-block; width:100px">Gender:</label><select name="gender" style="margin-left:5px" required><option value="" disabled selected hidden></option><option value="Female">Female</option><option value="Male">Male</option><option value="Other">Other</option></select></p>
                     <p><label for="username" style="display:inline-block; width:100px">Create Username:</label><input type="text" id="username" name="username" style="margin-bottom:10px; margin-left:5px" required></p>
                     <p><label for="password" style="display:inline-block; width:100px">Create Password:</label><input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" style="margin-bottom:10px; margin-left:5px" required></p>
                     <p><label for="passwordConf" style="display:inline-block; width:100px">Confirm Password:</label><input type="password" id="passwordConf" name="passwordConf" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" style="margin-bottom:10px; margin-left:5px" required></p>
                     <p style="color:red;"><small>Password must contain at least one number, one uppercase character, one lowercase character, and at least 8 characters</small></p>
-                    <!--Submit Button-->
                     <input class="btn btn-outline-light btn-lg px-5" type="submit">
 
                 </form>
+                -->
                 
                 <script>
                   var password = document.getElementById("password"), confirm_password = document.getElementById("passwordConf");

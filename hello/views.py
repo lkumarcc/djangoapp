@@ -5,10 +5,10 @@ from django.shortcuts import redirect
 from hello.forms import LogMessageForm, CreateUserForm
 from hello.models import LogMessage
 from django.views.generic import ListView
-from .models import Profile, addListings, userinfo, Shome, allinformation, Favorite
+from .models import Profile, addListings, Shome, allinformation, Favorite
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .forms import AddListingForm, DeleteFavorites
+from .forms import AddListingForm, DeleteFavorites, EditProfileForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
@@ -18,12 +18,29 @@ class HomeListView(ListView):
     #this cant be inside here but theres nowhere else to put it, need new homepage
 
 def home(request):
-    shome_list = allinformation.objects.all().exclude(user=request.user)
+    shome_list = allinformation.objects.all()
     return render(request, 'hello/home.html', {'shome_list': shome_list})
 
 def profile(request):
     user_listings = allinformation.objects.filter(user=request.user)
-    return render(request, "hello/profile.html", {'user_listings': user_listings,} )
+    submitted = False
+    #FXME 
+    user_instance = Profile.objects.get(user = request.user)
+   
+    form = EditProfileForm(instance=user_instance)
+    if request.method =='POST':
+        form = EditProfileForm(data =request.POST, files = request.FILES, instance= user_instance)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return HttpResponseRedirect('/profile?submitted=True')
+    else:
+        form = EditProfileForm(instance=user_instance)
+        if 'submitted' in request.GET: 
+            submitted = True
+
+    return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form, 'submitted': submitted} )
 
 def message(request):
     return render(request, "hello/message.html")
@@ -67,8 +84,6 @@ def favorites(request):
 def about(request):
     return render(request, "hello/about.html")
 
-def create_acc(request):
-    return render(request, "hello/create_acc.html")
 
 def login_home(request):
     return render(request, "hello/login_home.html")
@@ -182,50 +197,44 @@ def log_message(request):
         return render(request, "hello/log_message.html", {"form": form}) 
     
 
-def userdisplay(request):
-    form = CreateUserForm(request.POST or None)
+def create_acc(request):
     if request.method == "POST":
+        form = CreateUserForm(request.POST)
         if form.is_valid():
-            # message = form.save(commit=False)
-            first = request.POST.get("firstname")
-            last = request.POST.get("lastname")
-            uname = request.POST.get("username")
-            passw = request.POST.get("password")
-            email = request.POST.get("email")
-            phone = request.POST.get("phone")
-            gen = request.POST.get("gender")
-            new_user = User.objects.create_user(uname, email, passw, first_name = first, last_name = last)
-            new_user = form.save(commit=False)
-            # new_user.first_name = first
-            # new_user.last_name = last
-            new_user.save()
-            print(new_user)
-            return render(request, "hello/login_home.html")
-        else:
-            return render(request, "hello/test.html")
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            user.profile.phone = request.POST['phone']
+            user.profile.school = request.POST['school']
+            user.profile.gender = request.POST['gender']
+            login(request, user)
+            messages.success(request,("Registration Successful!"))
+            shome_list = allinformation.objects.all()
+            return render(request, "hello/home.html", {'shome_list': shome_list})
+    else:
+        form = CreateUserForm() 
+
+    return render(request, "hello/create_acc.html", {'form': form,})
 
 
 
 # if __name__ == '__main__':
 #     all_ammenities() 
 
+#FIXME has some bugs 
 def authenticateuser(request):
-    form = CreateUserForm(request.POST or None)
     if request.method == "POST":
-        if form.is_valid():
-            checkusername = request.POST.get("username")
-            checkpassword = request.POST.get("password")
-        else:
-            print("test")
-            return render(request, "hello/test.html")
-    print(checkusername, checkpassword)
-    user = authenticate(username=checkusername, password=checkpassword)
-    if user is not None:
-       login(request, user) 
-       shome_list = allinformation.objects.all()
-       return render(request, "hello/home.html", {'shome_list': shome_list})
-    else:
-        return render(request, "hello/create_acc.html")
+        checkusername = request.POST.get("username")
+        checkpassword = request.POST.get("password")
+        user = authenticate(username=checkusername, password=checkpassword)
+        if user is not None:
+            login(request, user) 
+            messages.info(request, f"You are now logged in as {user.username}!")
+            shome_list = allinformation.objects.all()
+            return render(request, "hello/home.html", {'shome_list': shome_list})
+    return render(request, "hello/login_home.html")
+        
 
 def logoutuser(request):
     if request.method == "POST":

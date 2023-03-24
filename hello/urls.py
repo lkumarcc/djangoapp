@@ -1,7 +1,6 @@
 from django.urls import path
 from hello import views
 
-from hello.models import LogMessage, Shome, allinformation
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
@@ -26,9 +25,7 @@ urlpatterns = [
     path("test/", views.test, name="test"),
     path("create_acc/", views.create_acc, name="create_acc"),
     path("login_home/", views.login_home, name="login_home"), 
-    path("userdisplay/", views.userdisplay, name="userdisplay"),
     path("authenticateuser/", views.authenticateuser, name="authenticateuser"),  
-    path("authenticateuser/", views.authenticateuser, name="authenticateuser"), 
     path("logoutuser/", views.logoutuser, name="logoutuser"), 
     path("search_listings/", views.search_listings, name="search_listings"), 
     path("addFavorites/", views.addFavorites, name="addFavorites"), 
