@@ -136,6 +136,9 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("username","first_name", "last_name", "email", "password1", "password2", "phone", "school", "gender")
+    #might implement for password - using standard validation now but has more features 
+    #pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+    #<p style="color:red;"><small>Password must contain at least one number, one uppercase character, one lowercase character, and at least 8 characters</small></p>
 
 
 class EditProfileForm(ModelForm):
@@ -143,14 +146,14 @@ class EditProfileForm(ModelForm):
    # lastname = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'maxLength': 12}), required=True, validators=[name])
    # username = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'maxLength': 12}), required=True, validators=[name])  
    # email = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'School Email Only (.edu)', 'maxLength': 30}), required=True, validators=[school_email])
-    phone = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title':'1234567891', 'maxLength': 10}), validators=[phone_number])
+    phone = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title':'1234567891', 'maxLength': 10}),required=False, validators=[phone_number])
     school = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Ex. Tulane University', 'maxLength': 30}), required=True, validators=[letters_only])
     gender = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=GENDER_CHOICES),required =True)
     bio = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'title':'Bio', 'maxLength': 100}), required=False)
-    profile_pic = forms.ImageField(label="Profile Picture", required=False, validators=[FileExtensionValidator(['jpg'])])
-    city = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'City', 'maxLength': 30}), required=True, validators=[letters_only])
-    state = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=STATE_CHOICES),required =True)
-    insta = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Ex: https://www.instagram.com/tulaneu/', 'maxLength': 50}), required=True, validators=[letters_only])
+    profile_pic = forms.ImageField(label="Profile Picture", validators=[FileExtensionValidator(['jpg'])])
+    city = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'City', 'maxLength': 30}), required=False, validators=[letters_only])
+    state = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=STATE_CHOICES), required=False)
+    insta = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Ex: https://www.instagram.com/tulaneu/', 'maxLength': 50}),required=False, validators=[letters_only])
 
     class Meta: 
         model = Profile

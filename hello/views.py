@@ -23,10 +23,7 @@ def home(request):
 
 def profile(request):
     user_listings = allinformation.objects.filter(user=request.user)
-    submitted = False
-    #FXME 
     user_instance = Profile.objects.get(user = request.user)
-   
     form = EditProfileForm(instance=user_instance)
     if request.method =='POST':
         form = EditProfileForm(data =request.POST, files = request.FILES, instance= user_instance)
@@ -34,13 +31,11 @@ def profile(request):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return HttpResponseRedirect('/profile?submitted=True')
+            return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form})
     else:
         form = EditProfileForm(instance=user_instance)
-        if 'submitted' in request.GET: 
-            submitted = True
 
-    return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form, 'submitted': submitted} )
+    return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form})
 
 def message(request):
     return render(request, "hello/message.html")
