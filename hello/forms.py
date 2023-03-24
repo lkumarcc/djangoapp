@@ -123,14 +123,14 @@ LAUNDRY_CHOICES= (
 )
 
 class CreateUserForm(UserCreationForm):
-    email = forms.EmailField(widget=forms.EmailInput(attrs = {'class':'form-control',}))
-    first_name = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','max_length':50}))
-    last_name = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','max_length':50}))
-    username = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','max_length':50}))
-    password1 = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','max_length':50}), label="Password")
-    password2 = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','max_length':50}), label="Confirm Password")
+    email = forms.EmailField(widget=forms.EmailInput(attrs = {'class':'form-control','title':'Example@University.edu'}), validators=[school_email], required=True)
+    first_name = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title':'First Name', 'max_length':50}), required=True, validators=[name])
+    last_name = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','max_length':50, 'title': 'Last Name'}), required=True)
+    username = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','max_length':50}), required=True)
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs = {'class':'form-control','max_length':50}), label="Password", required=True)
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs = {'class':'form-control','max_length':50}), label="Confirm Password", required=True)
     phone = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title':'1234567891', 'maxLength': 10}), validators=[phone_number])
-    school = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Ex. Tulane University', 'maxLength': 30}), required=True, validators=[letters_only])
+    school = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Ex. Tulane University', 'maxLength': 100}), required=True, validators=[letters_only])
     gender = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=GENDER_CHOICES),required =True)
 
     class Meta:
