@@ -147,7 +147,7 @@
                     <p class="mb-4">Security Deposit: {{addyinfo.securitydeposit}}</p>
                     <form action = "/addFavorites/" method = "post">
                         {% csrf_token %}
-                        <button class="btn btn-primary py-1 px-3 me-1 animated fadeIn" type="submit" name = "favorite" value={{addyinfo.id}}>                        
+                        <button class="btn btn-primary me-1 mb-2 animated fadeIn" type="submit" name = "favorite" value={{addyinfo.id}}>                        
                             <img class="img-fluid" src="{% static 'hello/images/icon-favorite.png'%}" alt="Icon" style="width: 60px; height: 60px;">
                             Favorite
                         </button>

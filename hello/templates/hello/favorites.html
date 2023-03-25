@@ -136,7 +136,15 @@
                                             
                                         <img src="{{listing.image.url}}"  width="350" height="180" alt="Listing Picture">
 
-                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">Sublet</div>
+                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-2">
+                                            <form action = "/addFavorites/" method = "post">
+                                                {% csrf_token %}
+                                            <button class="btn btn-primary py-1 px-1 me-1 animated fadeIn" type="submit" name = "favorite" value={{listing.id}}>                        
+                                                <img class="img-fluid" src="{% static 'hello/images/icon-favorite.png'%}" alt="Icon" style="width: 30px; height: 30px;">
+                                                Favorite
+                                            </button>
+                                            </form>
+                                        </div>
                                         
                                         <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{listing.hometype}}</div>
                                     </div>
@@ -156,7 +164,9 @@
                                         <label for="delete_favorite"></label>
                                         <input name="delete_favorite" class="btn btn-danger mt-4" type="submit" value="{{listing.id}}" onclick="return confirm('Are you sure you would like to delete this listing?')"/>   
                                     </form>       {% endcomment %}
-                                    <a href="{% url 'delete_favorite' listing.id%}" class="btn btn-outline-danger">Delete Listing</a>
+                                    <p class="mt-3" style= "text-align: center;">
+                                        <a href="{% url 'delete_favorite' listing.id%}" class="btn btn-outline-danger">Remove Listing</a>
+                                    </p>
                                 </div>
                             </a>
                         </div>

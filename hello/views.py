@@ -267,6 +267,8 @@ def addFavorites(request):
         return redirect("/home")
             
             
+def terms_conditions(request):
+    return render(request, "hello/terms_conditions.html")
 
             
             

@@ -30,6 +30,8 @@ urlpatterns = [
     path("search_listings/", views.search_listings, name="search_listings"), 
     path("addFavorites/", views.addFavorites, name="addFavorites"), 
     path("delete_favorite/<int:listingid>", views.delete_favorite, name="delete_favorite"), 
+    path("terms_conditions/", views.terms_conditions, name="terms_conditions"), 
+
     # path("all-ammenities/", views.all_ammenities, name="all_amenities")
 
     
