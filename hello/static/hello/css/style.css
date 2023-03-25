@@ -448,13 +448,3 @@ input[name=message] {
     padding-right: 0;
     border-right: none;
 }
-
-
-/*** Modal (Pop Ups) ***/
-.modal-backdrop {
-    z-index: 100000 !important;
-  }
-
-  .modal {
-    z-index: 100001 !important;
-  }

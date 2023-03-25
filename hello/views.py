@@ -22,6 +22,7 @@ def home(request):
     return render(request, 'hello/home.html', {'shome_list': shome_list})
 
 def profile(request):
+    error = False
     user_listings = allinformation.objects.filter(user=request.user)
     user_instance = Profile.objects.get(user = request.user)
     form = EditProfileForm(instance=user_instance)
@@ -31,11 +32,13 @@ def profile(request):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form})
+            return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form, 'error':error})
+        else: 
+            error= True; 
     else:
         form = EditProfileForm(instance=user_instance)
 
-    return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form})
+    return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form, 'error':error})
 
 def message(request):
     return render(request, "hello/message.html")

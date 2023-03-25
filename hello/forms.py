@@ -149,8 +149,8 @@ class EditProfileForm(ModelForm):
     phone = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title':'1234567891', 'maxLength': 10}),required=False, validators=[phone_number])
     school = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Ex. Tulane University', 'maxLength': 30}), required=True, validators=[letters_only])
     gender = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=GENDER_CHOICES),required =True)
-    bio = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'title':'Bio', 'maxLength': 100}), required=False)
-    profile_pic = forms.ImageField(label="Profile Picture", validators=[FileExtensionValidator(['jpg'])])
+    bio = forms.CharField(widget=forms.Textarea(attrs = {'class':'form-control', 'title':'Bio', 'maxLength': 600}), required=False)
+    profile_pic = forms.ImageField(label="Profile Picture", validators=[FileExtensionValidator(['jpg', 'jpeg'])])
     city = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'City', 'maxLength': 30}), required=False, validators=[letters_only])
     state = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=STATE_CHOICES), required=False)
     insta = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Ex: https://www.instagram.com/tulaneu/', 'maxLength': 50}),required=False, validators=[letters_only])
@@ -158,7 +158,7 @@ class EditProfileForm(ModelForm):
     class Meta: 
         model = Profile
         #match database fields 
-        fields = ("phone", "school", "gender", "bio", "city", "state", "insta", "profile_pic")
+        fields = ("phone", "school", "gender", "city", "state", "insta", "bio", "profile_pic")
         exclude = ['user']
 
 class AddListingForm(ModelForm):
@@ -172,12 +172,12 @@ class AddListingForm(ModelForm):
     numbertenants = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Example: 4', 'maxLength': 2}), required=True, validators=[numbers_only], label="Total Number of Tenants")
     gender = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=GENDER_LISTING_CHOICES),required =True)
     beds = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Example: 4', 'maxLength': 2}), required=True, validators=[numbers_only], label="Bedrooms Available")
-    addrentinfo = forms.CharField(widget=forms.Textarea(attrs = {'class':'form-control','title': 'Utilities not included in rent, upper property in duplex, two entrances to apartment, etc.', 'maxLength': 300}), label="Additional Information", required=False)
+    addrentinfo = forms.CharField(widget=forms.Textarea(attrs = {'class':'form-control','title': 'Utilities not included in rent, upper property in duplex, two entrances to apartment, etc.', 'maxLength': 255}), label="Additional Information", required=False)
     parking = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=PARKING_CHOICES),required =True)
     pets = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=PETS_CHOICES),required =True)
     laundry = forms.CharField(widget=forms.Select(attrs ={'class':'form-select'}, choices=LAUNDRY_CHOICES),required =True)
-    addamenityinfo = forms.CharField(widget=forms.Textarea(attrs = {'class':'form-control','title': 'Backyard pool, large front porch, fireplace in living room, etc.', 'maxLength': 300}), label="Additional Amenities", required=False)
-    image = forms.ImageField(label="Listing Main Image", required=False, validators=[FileExtensionValidator(['jpg'])])
+    addamenityinfo = forms.CharField(widget=forms.Textarea(attrs = {'class':'form-control','title': 'Backyard pool, large front porch, fireplace in living room, etc.', 'maxLength': 255}), label="Additional Amenities", required=False)
+    image = forms.ImageField(label="Listing Main Image", required=False, validators=[FileExtensionValidator(['jpg', 'jpeg'])])
    
     #belongs inside each form class
     class Meta: 

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db.models.signals import post_save # Produce a signal if there is any database action.
+from PIL import Image, ImageOps
 
 class LogMessage(models.Model):
     message = models.CharField(max_length=300)
@@ -28,14 +29,26 @@ class Profile(models.Model):
    # username = models.CharField(max_length=12, blank=True, null=True)
    # password = models.CharField(max_length=12, blank=True, null=True)
     school = models.CharField(max_length=100, blank=True, null=True)
-    bio = models.CharField(max_length=300, blank=True, null=True)  
-    profile_pic = models.ImageField(upload_to="images/profilepics/",default="images/profilepics/default_profile_pic.jpg", height_field=None, width_field=None, max_length=100,blank=True, null=True)
+    bio = models.TextField(max_length=600, blank=True, null=True)  
+    profile_pic = models.ImageField(upload_to="images/profilepics/",default="images/profilepics/default_profile_pic.jpg", height_field=None, width_field=None, max_length=500,blank=True, null=True)
     city = models.CharField(max_length=200, blank=True, null=True)
     state = models.CharField(max_length=22, blank=True, null=True)
     insta = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return str(self.user)
+    
+    #resize profile pics 
+    def save(self, *args, **kwargs):
+        super().save(*args, *kwargs)
+        SIZE = (170,170)
+        print(self.profile_pic.path)
+        if self.profile_pic:
+            img = Image.open(self.profile_pic.path)
+            img = ImageOps.exif_transpose(img)
+            #img = ImageOps.crop()
+            img.resize(SIZE, Image.LANCZOS)
+            img.save(self.profile_pic.path)
     
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
