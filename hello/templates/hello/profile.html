@@ -80,6 +80,10 @@
                   <p class="text-muted mb-1">{{user.profile.school}}</p>
                   {% if user.profile.city and user.profile.state %}
                   <p class="text-muted mb-4">{{user.profile.city}}, {{user.profile.state}}</p>
+                  {% elif user.profile.city %}
+                  <p class="text-muted mb-4">{{user.profile.city}}</p>
+                  {% elif user.profile.state %}
+                  <p class="text-muted mb-4">{{user.profile.state}}</p>
                   {%else %}
                   <p class="text-muted mb-4">City, State</p>
                   {% endif %}

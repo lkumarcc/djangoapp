@@ -168,17 +168,36 @@
                     <div class="row g-5 align-items-center">
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                             <!--Insert Image of Owner (Make sure to restrict size of this lol)-->
-                            <img class="img-fluid rounded w-100" src="{% static 'hello/images/kayla-headshot.jpg' %}" alt="">
+                            <img class="img-fluid rounded w-100" src="{{ownerProfile.profile_pic.url}}" alt="Owner Profile Picture">
                         </div>
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                             <div class="mb-4">
                                 <!--Insert Name and Description of Owner-->
-                                <h1 class="mb-3"><span class="text-primary">Owner: </span> </h1>
-                                <p>Hello! I am a Tulane Student who is looking to sublet this space. Please feel free to reach out to me with further questions. </p>
+                                <h1 class="mb-3"><span class="text-primary">Owner: </span> {{ownerUser.first_name}} {{ownerUser.last_name}} </h1>
+                                <h4 class="mb-3">{{ownerProfile.school}}</h4>
+                                <p class="text-break">{% if ownerProfile.bio %} {{ownerProfile.bio}} {% endif %}</p>
                             </div>
-                            <button class="btn btn-primary py-1 px-3 me-1 animated fadeIn">                        
-                                <img class="img-fluid" src="{% static 'hello/images/icon-message.png'%}" alt="Icon" style="width: 60px; height: 60px;">
-                                Message Me
+                            <h4 class="mb-3">
+                            {% if ownerProfile.city and ownerProfile.state %} {{ownerProfile.city}}, {{ownerProfile.state}}
+                            {% elif user.profile.city %}
+                            {{user.profile.city}}
+                            {% elif user.profile.state %}
+                            {{user.profile.state}}
+                            {% endif %}
+                            </h4>
+                            {% if ownerProfile.insta%}
+                            <p class="mb-4">
+                                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                                <a target="_blank" href="{{ownerProfile.insta}}">{{ownerProfile.insta}}</a>
+                            </p>
+                            {% endif %}
+                            <button class="btn btn-primary pt-2 pb-2 py-1 px-3 me-1 animated fadeIn" style="font-size:18px;">                        
+                                <i class="fas fa-envelope" style="color: #0E2E50; font-size:28px;"></i>                                
+                                {{ownerUser.email}}
+                                {% if ownerProfile.phone %} 
+                                <i class="fas fa-phone" style="color: #0E2E50; font-size:28px;"></i>
+                                 {{ownerProfile.phone}}
+                                 {% endif %}
                             </button>
                         </div>
                     </div>

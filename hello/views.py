@@ -130,8 +130,12 @@ def add_listing(request):
 
 def view_listing(request, listing_id):
     addyinfo = allinformation.objects.filter(id=listing_id).last()
+    ownerProfile = Profile.objects.filter(user_id=addyinfo.user_id).last()
+    ownerUser = User.objects.filter(id=addyinfo.user_id).last()
     print("Listing ID:", listing_id)
-    return render(request, "hello/view_listing.html", {'addyinfo': addyinfo,})
+    print("Owner ID:", addyinfo.user_id)
+    #print(ownerProfile)
+    return render(request, "hello/view_listing.html", {'addyinfo': addyinfo, 'ownerProfile': ownerProfile, 'ownerUser': ownerUser,})
 
 def edit_listing(request, pk):
     submitted = False
@@ -203,9 +207,12 @@ def create_acc(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
-            user.profile.phone = request.POST['phone']
-            user.profile.school = request.POST['school']
-            user.profile.gender = request.POST['gender']
+            Profile.objects.create(
+            user = user,
+            phone = request.POST['phone'],
+            school = request.POST['school'],
+            gender = request.POST['gender'],
+            )
             login(request, user)
             messages.success(request,("Registration Successful!"))
             shome_list = allinformation.objects.all()

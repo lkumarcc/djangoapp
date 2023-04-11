@@ -23,7 +23,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
    # email = models.CharField(max_length=30, blank=True, null=True)
     phone = models.CharField(max_length=12, blank=True, null=True)
-    gender = models.CharField(max_length=12, blank=True, null=True)
+    gender = models.CharField(max_length=30, blank=True, null=True)
    # firstname = models.CharField(max_length=12, blank=True, null=True)
    # lastname = models.CharField(max_length=12, blank=True, null=True)
    # username = models.CharField(max_length=12, blank=True, null=True)
@@ -38,6 +38,9 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user)
     
+    """
+    This code is causing a bug:
+
     #resize profile pics 
     def save(self, *args, **kwargs):
         super().save(*args, *kwargs)
@@ -49,7 +52,10 @@ class Profile(models.Model):
             #img = ImageOps.crop()
             img.resize(SIZE, Image.LANCZOS)
             img.save(self.profile_pic.path)
-    
+    """
+"""   
+Code Not needed: 
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -59,7 +65,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-
+"""
 class addListings(models.Model):
     address = models.CharField(max_length=200, blank=True, null=True)
     city = models.CharField(max_length=200, blank=True, null=True)
