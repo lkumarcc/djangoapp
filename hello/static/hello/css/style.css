@@ -448,3 +448,9 @@ input[name=message] {
     padding-right: 0;
     border-right: none;
 }
+
+/*** Red Asterik for required fields ***/
+label.required::after{
+    content: '*';
+    color: red; 
+}

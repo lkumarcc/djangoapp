@@ -123,6 +123,7 @@ LAUNDRY_CHOICES= (
 )
 
 class CreateUserForm(UserCreationForm):
+    required_css_class = 'required'
     email = forms.EmailField(widget=forms.EmailInput(attrs = {'class':'form-control','title':'Example@University.edu'}), validators=[school_email], required=True)
     first_name = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title':'First Name', 'max_length':50}), required=True, validators=[name])
     last_name = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','max_length':50, 'title': 'Last Name'}), required=True)
@@ -142,6 +143,7 @@ class CreateUserForm(UserCreationForm):
 
 
 class EditProfileForm(ModelForm):
+    required_css_class = 'required'
    # firstname = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'title':'First Name', 'maxLength': 12}), required=True, validators=[name])
    # lastname = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'maxLength': 12}), required=True, validators=[name])
    # username = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'maxLength': 12}), required=True, validators=[name])  
@@ -162,6 +164,7 @@ class EditProfileForm(ModelForm):
         exclude = ['user']
 
 class AddListingForm(ModelForm):
+    required_css_class = 'required'
     address = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'title':'Example: 123456 Street Name', 'maxLength': 75}), required=True, validators=[address_validation])
     city = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control', 'maxLength': 30}), required=True, validators=[letters_only])
     zip = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','title': 'Example: 12345', 'maxLength': 5}), required=True, validators=[numbers_only])
