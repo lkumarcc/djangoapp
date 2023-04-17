@@ -8,7 +8,7 @@ from django.views.generic import ListView
 from .models import Profile, addListings, Shome, allinformation, Favorite
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .forms import AddListingForm, DeleteFavorites, EditProfileForm
+from .forms import AddListingForm, DeleteFavorites, EditProfileForm, changePasswordForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -23,25 +23,43 @@ def home(request):
     shome_list = allinformation.objects.all()
     return render(request, 'hello/home.html', {'shome_list': shome_list})
 
+
 @login_required(login_url="/login_home")
 def profile(request):
     error = False
     user_listings = allinformation.objects.filter(user=request.user)
     user_instance = Profile.objects.get(user = request.user)
     form = EditProfileForm(instance=user_instance)
+    editPasswordForm = changePasswordForm(instance=user_instance)
     if request.method =='POST':
         form = EditProfileForm(data =request.POST, files = request.FILES, instance= user_instance)
+        editPasswordForm = changePasswordForm(data =request.POST, files = request.FILES, instance= user_instance)
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form, 'error':error})
+            return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form, 'error':error, 'editPasswordForm':editPasswordForm})
+        elif editPasswordForm.is_valid():
+            if editPasswordForm.cleaned_data["newPass1"] == editPasswordForm.cleaned_data["newPass2"]:
+                if authenticate(username=request.user.username, password=editPasswordForm.cleaned_data["currentPass"]):
+                    user = User.objects.get(username=request.user)
+                    user.set_password(editPasswordForm.cleaned_data["newPass1"])
+                    user.save()
+                    user = authenticate(username=request.user.username, password=editPasswordForm.cleaned_data["newPass1"])
+                    login(request,user)
+                    return render(request, "hello/profile.html", {'user_listings': user_listings, 'editPasswordForm':editPasswordForm, 'error':error, 'editPasswordForm':editPasswordForm})
+                else:
+                    form = "NULL"
+                    error= True; 
+            else:
+                form = "NULL"
+                error= True; 
         else: 
             error= True; 
     else:
         form = EditProfileForm(instance=user_instance)
 
-    return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form, 'error':error})
+    return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form, 'error':error, 'editPasswordForm':editPasswordForm})
 
 @login_required(login_url="/login_home")
 def message(request):
