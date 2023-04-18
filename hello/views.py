@@ -302,9 +302,13 @@ def addFavorites(request):
     else:
         return redirect("/home")
             
-@login_required(login_url="/login_home")    
+
 def terms_conditions(request):
     return render(request, "hello/terms_conditions.html")
+
+
+def privacy_policy(request):
+    return render(request, "hello/privacy_policy.html")
 
             
             

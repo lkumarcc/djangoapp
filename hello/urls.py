@@ -31,7 +31,7 @@ urlpatterns = [
     path("addFavorites/", views.addFavorites, name="addFavorites"), 
     path("delete_favorite/<int:listingid>", views.delete_favorite, name="delete_favorite"), 
     path("terms_conditions/", views.terms_conditions, name="terms_conditions"), 
-
+    path("privacy_policy/", views.privacy_policy, name="privacy_policy"), 
     # path("all-ammenities/", views.all_ammenities, name="all_amenities")
 
     
