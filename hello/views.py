@@ -8,41 +8,64 @@ from django.views.generic import ListView
 from .models import Profile, addListings, Shome, allinformation, Favorite
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .forms import AddListingForm, DeleteFavorites, EditProfileForm
+from .forms import AddListingForm, DeleteFavorites, EditProfileForm, changePasswordForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
     model = LogMessage
     #this cant be inside here but theres nowhere else to put it, need new homepage
 
+@login_required(login_url="/login_home")
 def home(request):
     shome_list = allinformation.objects.all()
     return render(request, 'hello/home.html', {'shome_list': shome_list})
 
+
+@login_required(login_url="/login_home")
 def profile(request):
     error = False
     user_listings = allinformation.objects.filter(user=request.user)
     user_instance = Profile.objects.get(user = request.user)
     form = EditProfileForm(instance=user_instance)
+    editPasswordForm = changePasswordForm(instance=user_instance)
     if request.method =='POST':
         form = EditProfileForm(data =request.POST, files = request.FILES, instance= user_instance)
+        editPasswordForm = changePasswordForm(data =request.POST, files = request.FILES, instance= user_instance)
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form, 'error':error})
+            return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form, 'error':error, 'editPasswordForm':editPasswordForm})
+        elif editPasswordForm.is_valid():
+            if editPasswordForm.cleaned_data["newPass1"] == editPasswordForm.cleaned_data["newPass2"]:
+                if authenticate(username=request.user.username, password=editPasswordForm.cleaned_data["currentPass"]):
+                    user = User.objects.get(username=request.user)
+                    user.set_password(editPasswordForm.cleaned_data["newPass1"])
+                    user.save()
+                    user = authenticate(username=request.user.username, password=editPasswordForm.cleaned_data["newPass1"])
+                    login(request,user)
+                    return render(request, "hello/profile.html", {'user_listings': user_listings, 'editPasswordForm':editPasswordForm, 'error':error, 'editPasswordForm':editPasswordForm})
+                else:
+                    form = "NULL"
+                    error= True; 
+            else:
+                form = "NULL"
+                error= True; 
         else: 
             error= True; 
     else:
         form = EditProfileForm(instance=user_instance)
 
-    return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form, 'error':error})
+    return render(request, "hello/profile.html", {'user_listings': user_listings, 'form':form, 'error':error, 'editPasswordForm':editPasswordForm})
 
+@login_required(login_url="/login_home")
 def message(request):
     return render(request, "hello/message.html")
 
+@login_required(login_url="/login_home")
 def delete_favorite(request, listingid):
     listing = Favorite.objects.get(listing_id = listingid)
     listing.delete()
@@ -69,6 +92,7 @@ def delete_favorite(request, listingid):
     #         print(form.errors.as_data())
     # return HttpResponseRedirect('/favorites/')
 
+@login_required(login_url="/login_home")
 def favorites(request):
     #handle accessing user favorites
     listingid = list(Favorite.objects.filter(user=request.user).values("listing_id"))
@@ -79,6 +103,7 @@ def favorites(request):
     
     return render(request, "hello/favorites.html", {'favorite_listings': favorite_listings, 'messages': messages})
 
+@login_required(login_url="/login_home")
 def about(request):
     return render(request, "hello/about.html")
 
@@ -86,7 +111,7 @@ def about(request):
 def login_home(request):
     return render(request, "hello/login_home.html")
 
-
+@login_required(login_url="/login_home")
 def search_listings(request):
     if request.method == "POST":
         search = request.POST.get("search")
@@ -112,6 +137,7 @@ def search_listings(request):
     else:
         return render(request, "hello/search_listings.html",{})
 
+@login_required(login_url="/login_home")
 def add_listing(request):
     submitted = False
     if request.method =='POST':
@@ -126,8 +152,8 @@ def add_listing(request):
         form = AddListingForm()
         if 'submitted' in request.GET: 
             submitted = True
-    return render(request, "hello/add_listing.html", {'form': form, 'submitted': submitted} )
 
+@login_required(login_url="/login_home")
 def view_listing(request, listing_id):
     addyinfo = allinformation.objects.filter(id=listing_id).last()
     ownerProfile = Profile.objects.filter(user_id=addyinfo.user_id).last()
@@ -137,6 +163,7 @@ def view_listing(request, listing_id):
     #print(ownerProfile)
     return render(request, "hello/view_listing.html", {'addyinfo': addyinfo, 'ownerProfile': ownerProfile, 'ownerUser': ownerUser,})
 
+@login_required(login_url="/login_home")
 def edit_listing(request, pk):
     submitted = False
     listing_object = allinformation.objects.get(id=pk)
@@ -164,7 +191,7 @@ def edit_listing(request, pk):
 
     return render(request, 'hello/edit_listing.html', {'form': form, 'submitted': submitted})
 
-
+@login_required(login_url="/login_home")
 def test(request):
     allInfoDisplay = allinformation.objects.all()
     print(allInfoDisplay)
@@ -172,7 +199,7 @@ def test(request):
     return render(request, "hello/listing.html", {'allInfoDisplay': allInfoDisplay,})
 
 
-
+@login_required(login_url="/login_home")
 def hello_there(request, name):
     return render(
         request,
@@ -186,6 +213,7 @@ def hello_there(request, name):
 
 print("http://127.0.0.1:8000/hello/name")
 
+@login_required(login_url="/login_home")
 def log_message(request):
     form = LogMessageForm(request.POST or None)
 
@@ -240,13 +268,14 @@ def authenticateuser(request):
             return render(request, "hello/home.html", {'shome_list': shome_list})
     return render(request, "hello/login_home.html")
         
-
+@login_required(login_url="/login_home")
 def logoutuser(request):
     if request.method == "POST":
         logout(request)
 
         return redirect('/login_home')
     
+@login_required(login_url="/login_home")
 def addFavorites(request):
     if request.method == "POST":
         #get id number
@@ -273,7 +302,7 @@ def addFavorites(request):
     else:
         return redirect("/home")
             
-            
+@login_required(login_url="/login_home")    
 def terms_conditions(request):
     return render(request, "hello/terms_conditions.html")
 

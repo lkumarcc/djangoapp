@@ -25,7 +25,6 @@ GENDER_CHOICES= (
 ('', ''),
 ('Female','Female'),
 ('Male','Male'),
-('Transgender','Transgender'),
 ('Non-binary/non-conforming', 'Non-binary/non-conforming'), 
 ('Preferred Not to Share', 'Prefer not to respond'), 
 )
@@ -141,6 +140,16 @@ class CreateUserForm(UserCreationForm):
     #pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
     #<p style="color:red;"><small>Password must contain at least one number, one uppercase character, one lowercase character, and at least 8 characters</small></p>
 
+class changePasswordForm(ModelForm):
+   # username = forms.CharField(widget=forms.TextInput(attrs = {'class':'form-control','max_length':50}), required=True)
+    currentPass = forms.CharField(widget=forms.PasswordInput(attrs = {'class':'form-control','max_length':50}), label="Enter Current Password", required=True)
+    newPass1 = forms.CharField(widget=forms.PasswordInput(attrs = {'class':'form-control','max_length':50}), label="Enter New Password", required=True)
+    newPass2 = forms.CharField(widget=forms.PasswordInput(attrs = {'class':'form-control','max_length':50}), label="Confirm New Password", required=True)
+
+    class Meta:
+        model = User
+        fields = ("currentPass","newPass1","newPass2")
+        exclude = ['user']
 
 class EditProfileForm(ModelForm):
     required_css_class = 'required'

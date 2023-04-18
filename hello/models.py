@@ -1,3 +1,4 @@
+import PIL
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -66,6 +67,10 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 """
+
+class changePass(models.Model):
+    password=models.CharField(max_length=200)
+    
 class addListings(models.Model):
     address = models.CharField(max_length=200, blank=True, null=True)
     city = models.CharField(max_length=200, blank=True, null=True)

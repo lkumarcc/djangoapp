@@ -159,7 +159,8 @@
                       <p class="mb-0">Password</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">****************                                     <a class="btn btn-outline-primary" href="">Change Password</a>
+                      <p class="text-muted mb-0">****************                                     <button  class="btn btn-primary" data-toggle="modal" data-target="#changePassword">
+                      Change Password</button>
                       </p>
                     </div>
                   </div>
@@ -253,5 +254,39 @@
         });
       </script>
       {% endif %}
+      <section>
+      <!-- Modal (PopUp) Change Password -->
+      <div class="modal " id="changePassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index: 100001 !important; background-color: rgba(0,0,0,0.7); max-height: 100vh;" data-backdrop="false">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered mt-4" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-primary font-italic me-1" id="exampleModalLongTitle">Change Password</h5>
+              </button>
+            </div>
+            <div class="modal-body"> 
+                  <form action = "" method = "post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{editPasswordForm.as_p}}
+                    
+            </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-primary"  onclick="location.href = '/profile'">Cancel</button>
+                      <input class="btn btn-primary" type="submit" value="Save Changes">
+                    </div>
+                  </form>
+                
+          </div>
+        </div>
+      </div>
+    </section>
+    {% if error %}
+    <script>
+      $(document).ready(function(){
+          $("#changePassword").modal('show');
+      });
+    </script>
+    {% endif %}
+  </section>
+
       
 {% endblock %}
