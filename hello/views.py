@@ -71,27 +71,6 @@ def delete_favorite(request, listingid):
     listing.delete()
     return redirect("/favorites")
     
-    
-    # print("test1")
-    # if request.method =='POST':
-    #     print("test post")
-    #     # create a form instance and populate it with data from the request:
-    #     form = DeleteFavorites(request.POST)
-    #     # check whether it's valid:
-    #     if form.is_valid():
-    #         form=form.save(commit=False)
-    #         listing_delete = form.cleaned_data['listing_id']
-    #         print(listing_delete, "?")
-    #         Favorite.objects.get(listing_id=listing_delete).delete()
-    #         print(Favorite.objects.get.all())
-    #         # process the data in form.cleaned_data as required
-    #         # ...
-    #         # redirect to a new URL:
-    #         return HttpResponseRedirect('/favorites/')
-    #     else:
-    #         print(form.errors.as_data())
-    # return HttpResponseRedirect('/favorites/')
-
 @login_required(login_url="/login_home")
 def favorites(request):
     #handle accessing user favorites
@@ -152,6 +131,8 @@ def add_listing(request):
         form = AddListingForm()
         if 'submitted' in request.GET: 
             submitted = True
+    
+    return render(request, "hello/add_listing.html", {'form': form, 'submitted': submitted})
 
 @login_required(login_url="/login_home")
 def view_listing(request, listing_id):
